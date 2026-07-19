@@ -13,11 +13,11 @@ export default withMermaid(defineConfig({
   // publicaría como página huérfana (/README) y entraría al sitemap.
   srcExclude: ['README.md'],
 
-  // El sitio se publica como GitHub Pages de proyecto: https://elpandape.github.io/quipu/.
-  // Si algún día se usa un dominio propio (CNAME en quipu-docs/public/), las tres cosas van
-  // juntas: quitar `base`, dejar `sitemap.hostname` en la raíz del dominio y volver el favicon
-  // del `head` a '/favicon.svg' (VitePress NO le aplica `base` a los atributos del head).
-  base: '/quipu/',
+  // El sitio se sirve en la RAÍZ del dominio (Vercel; ver vercel.json). Por eso `base` es '/' y
+  // el favicon del `head` apunta a '/favicon.svg' (VitePress NO le aplica `base` a los atributos
+  // del head). Si algún día se publicara bajo un subdirectorio (p. ej. GitHub Pages de proyecto),
+  // hay que mover las tres juntas: `base`, el favicon del head y `sitemap.hostname`.
+  base: '/',
 
   head: [
     ['meta', { name: 'theme-color', content: '#3aa675' }],
@@ -30,7 +30,7 @@ export default withMermaid(defineConfig({
     // declarar og:image apuntando a https://elpandape.github.io/quipu/og.png. Hoy public/ solo
     // tiene favicon.svg, y un SVG no sirve como og:image.
     ['meta', { name: 'twitter:card', content: 'summary' }],
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/quipu/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
   ],
 
   sitemap: {
