@@ -7,7 +7,7 @@ asíncrono del **Resumen Diario**, aunque opcionalmente puede enviarse individua
 
 ## Modelo
 
-La boleta usa el **mismo `Model\Invoice`** que la factura; se distingue por el `DocumentType`:
+La boleta usa el **mismo `Invoice`** que la factura; se distingue por el `DocumentType`:
 
 <CodeTabs>
 <template #php>

@@ -7,13 +7,13 @@ credenciales; lo cubre [de beta a producción](/produccion/de-beta-a-produccion)
 
 ## Idea general
 
-quipu expone un facade, `ElPandaPe\Quipu\Quipu`, que orquesta tres piezas inyectables:
+quipu expone un facade, `Quipu`, que orquesta tres piezas inyectables:
 
 - un **builder** (`XmlBuilder`) que convierte un `Model\*` en XML UBL (2.1 o 2.0 según el tipo),
 - un **signer** (`Signer`) que firma el XML con tu certificado,
 - un **sender** (`Sender`) que lo envía a SUNAT por SOAP y devuelve el CDR.
 
-El consumidor arma el comprobante, llama a `emitInvoice()` y recibe un `Result\BillResult` con el CDR.
+El consumidor arma el comprobante, llama a `emitInvoice()` y recibe un `BillResult` con el CDR.
 
 ```mermaid
 flowchart LR
@@ -150,7 +150,7 @@ foreach ($cdr->notes as $note) {
 </CodeTabs>
 
 Aquí inyectamos `InvoiceBuilder` porque solo emitimos facturas: ese builder sabe construir facturas y boletas
-(ambas son `Model\Invoice`). Si tu aplicación emite varios tipos de documento, inyecta `Xml\CompositeBuilder`,
+(ambas son `Invoice`). Si tu aplicación emite varios tipos de documento, inyecta `CompositeBuilder`,
 que despacha al builder adecuado según el documento. Ver [factura](/documentos/factura).
 
 ::: tip Beta acepta un certificado autofirmado
@@ -161,7 +161,7 @@ Para desarrollo no necesitas el certificado tributario real: genera uno autofirm
 
 ::: warning `paymentForm` tiene un default invisible que te salva del rechazo 3244
 El ejemplo omite `paymentForm`, pero **no** omite la *Forma de Pago* en el XML: el default del modelo es
-`Model\PaymentForm::Cash`, y `InvoiceBuilder` siempre emite el bloque `cac:PaymentTerms` con `FormaPago`.
+`PaymentForm::Cash`, y `InvoiceBuilder` siempre emite el bloque `cac:PaymentTerms` con `FormaPago`.
 Ese bloque es obligatorio desde la R.S. 000193-2020/SUNAT y es justo lo que valida el **rechazo 3244**. Si
 vendes al crédito, pasa `paymentForm: PaymentForm::Credit` **y** las `installments` correspondientes.
 :::
@@ -172,7 +172,7 @@ Beta rechaza una serie + correlativo ya enviado. Sube el `number` para reenviar 
 
 ## Entender el resultado
 
-`emitInvoice()` devuelve un `Result\BillResult` que envuelve un `Result\CdrResult`:
+`emitInvoice()` devuelve un `BillResult` que envuelve un `CdrResult`:
 
 <CodeTabs>
 <template #php>

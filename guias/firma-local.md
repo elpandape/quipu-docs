@@ -30,7 +30,7 @@ $signed->digestValue;  // el DigestValue de la firma
 
 ## El signer
 
-quipu usa `Signer\XmlSecSigner`, que envuelve `robrichards/xmlseclibs`:
+quipu usa `XmlSecSigner`, que envuelve `robrichards/xmlseclibs`:
 
 <CodeTabs>
 <template #php>
@@ -73,8 +73,8 @@ $view = $quipu->printable($invoice, $signed);
 
 > [!NOTE] `qrString()`/`printable()` solo para la familia de venta
 > El ejemplo de arriba funciona porque `$invoice` es una factura. Ambos métodos soportan **solo**
-> `Model\Invoice` (factura y boleta) y `Model\Note` (NC/ND); con guía de remisión, retención, percepción,
-> resumen diario, baja o reversión lanzan `Exception\InvalidDocumentException`, porque el formato de su QR no
+> `Invoice` (factura y boleta) y `Note` (NC/ND); con guía de remisión, retención, percepción,
+> resumen diario, baja o reversión lanzan `InvalidDocumentException`, porque el formato de su QR no
 > está confirmado contra el anexo técnico de SUNAT. Ver
 > [representación impresa](/guias/representacion-impresa).
 
@@ -88,7 +88,7 @@ $view = $quipu->printable($invoice, $signed);
 
 ## Errores de firma
 
-Si la firma falla, quipu lanza `ElPandaPe\Quipu\Exception\SigningException` (subclase de `QuipuException`):
+Si la firma falla, quipu lanza `SigningException` (subclase de `QuipuException`):
 
 - El PEM no contiene un certificado X.509 válido.
 - El PEM no contiene una llave privada válida.

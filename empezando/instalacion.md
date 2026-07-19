@@ -14,7 +14,7 @@ quipu requiere **PHP 8.4 o superior** y las siguientes extensiones de PHP:
 | `ext-dom` | Construcción y lectura del XML UBL |
 | `ext-openssl` | Firma xmldsig y manejo del certificado |
 | `ext-zip` | Compresión del XML en ZIP para el envío |
-| `ext-curl` | **Condicional.** Solo si usas el `CurlHttpClient` que viene incluido (el transporte HTTP de la **GRE REST** y la **Consulta de CPE**). No está declarada en `composer.json`: `GreClient` y `CpeValidityClient` reciben un `Contract\HttpClient` por constructor, así que puedes inyectar tu propia implementación (Guzzle, Symfony HttpClient, lo que uses) y prescindir de curl. |
+| `ext-curl` | **Condicional.** Solo si usas el `CurlHttpClient` que viene incluido (el transporte HTTP de la **GRE REST** y la **Consulta de CPE**). No está declarada en `composer.json`: `GreClient` y `CpeValidityClient` reciben un `HttpClient` por constructor, así que puedes inyectar tu propia implementación (Guzzle, Symfony HttpClient, lo que uses) y prescindir de curl. |
 
 Verifica tu entorno antes de instalar:
 

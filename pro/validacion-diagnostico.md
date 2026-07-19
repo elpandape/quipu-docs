@@ -9,7 +9,7 @@ hacer, cómo resolverlo y si tiene sentido reintentar.
 
 ## Validadores avanzados
 
-Los tres validadores Pro implementan el `Contract\Validator` de Lite (`errorsFor(Document): list<string>`,
+Los tres validadores Pro implementan el `Validator` de Lite (`errorsFor(Document): list<string>`,
 mensajes en español, lista vacía = pasa). Están pensados para correr **junto a** los de Lite, componiéndolos con
 `CompositeValidator`. La fachada `QuipuPro` ya los incluye; esta sección es para cuando armas el `Quipu` tú.
 

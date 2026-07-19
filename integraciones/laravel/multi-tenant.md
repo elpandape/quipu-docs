@@ -18,7 +18,7 @@ El multi-tenant se activa fijando el driver:
 
 ## El modelo Tenant expone su emisor
 
-Tu modelo Tenant implementa `Tenancy\ProvidesQuipuEmitter`, o usa el trait `Tenancy\HasQuipuEmitter`, que lo
+Tu modelo Tenant implementa `ProvidesQuipuEmitter`, o usa el trait `HasQuipuEmitter`, que lo
 resuelve desde columnas convencionales (override-ables) y **cifra las credenciales** con el cast `encrypted` de
 Laravel (`APP_KEY`) — apto para Laravel Cloud, sin ficheros de certificado en disco:
 

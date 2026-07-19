@@ -13,7 +13,7 @@ esta página. Si prefieres armarla desde inputs mínimos, con plantillas y sin l
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Invoice` es un DTO `readonly` que sirve para **factura y boleta** —se distinguen por el
+`Invoice` es un DTO `readonly` que sirve para **factura y boleta** —se distinguen por el
 `DocumentType`. Las propiedades clave del constructor:
 
 | Propiedad | Tipo | Notas |

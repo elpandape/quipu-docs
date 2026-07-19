@@ -2,7 +2,7 @@
 
 Los modelos de quipu viven bajo `ElPandaPe\Quipu\Model\` y representan el dominio de la facturación: el emisor,
 el cliente, los ítems, los totales. Casi todos son **DTOs `readonly`** (inmutables, con propiedades públicas
-promovidas en el constructor), e implementan `Contract\Document` cuando son documentos emitibles.
+promovidas en el constructor), e implementan `Document` cuando son documentos emitibles.
 
 <Availability lite pro />
 
@@ -715,7 +715,7 @@ final readonly class PrintTotals
 > `taxTotal` agrega todos los tributos; `igvAmount` es solo el IGV. Son distintos en cuanto hay ISC, ICBPER u
 > otros tributos, y confundirlos descuadra la impresión.
 
-## `Support\Money` — el formato de montos que exige SUNAT
+## `Money` — el formato de montos que exige SUNAT
 
 Los montos de `PrintView` van en crudo (`float`) a propósito. Para renderizarlos como SUNAT los espera, usa el
 mismo helper que usan internamente los builders UBL y el encoder del QR:
@@ -741,7 +741,7 @@ QR, un QR impreso nunca diverge del XML.
 <Availability lite pro />
 
 `Quipu::read($xml)` es el inverso de la construcción: parsea un XML firmado y reconstruye el `Model\*`
-correspondiente (implementa `Contract\Document`). Es útil para inspeccionar, re-emitir o auditar un comprobante
+correspondiente (implementa `Document`). Es útil para inspeccionar, re-emitir o auditar un comprobante
 a partir de su XML. Ahora bien, el *round-trip* **no es 100 % fiel**: guarda estas limitaciones conocidas antes
 de confiar en el modelo reconstruido.
 

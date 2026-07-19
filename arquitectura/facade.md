@@ -1,6 +1,6 @@
 # El facade Quipu
 
-`ElPandaPe\Quipu\Quipu` es el **punto de entrada único** que compone la maquinaria: construir el XML, firmarlo,
+`Quipu` es el **punto de entrada único** que compone la maquinaria: construir el XML, firmarlo,
 enviarlo a SUNAT y parsear el CDR. El consumidor inyecta las dependencias por constructor y llama a los métodos
 del facade.
 
@@ -80,7 +80,7 @@ host FE. Inyecta un `Sender` construido con `SoapEndpoints::otherCpeUrl()`. Ver 
 | `sendPack(list<SignedXml> $documents, string $batchName): TicketResult` | Envía hasta 500 documentos en un solo ZIP | `TicketResult` |
 | `getPackStatus(string $ticket): array<string, CdrResult>` | Resuelve un ticket de lote en un CdrResult por documento | `array` |
 
-Para el nombre del lote usa `Ws\BatchNamer`, que sigue la convención de nombrado de SUNAT. Ver [lotes](/guias/lotes).
+Para el nombre del lote usa `BatchNamer`, que sigue la convención de nombrado de SUNAT. Ver [lotes](/guias/lotes).
 
 ### Guías de remisión (GRE, REST/OAuth)
 
@@ -89,7 +89,7 @@ Para el nombre del lote usa `Ws\BatchNamer`, que sigue la convención de nombrad
 | `emitGuide(Document $document): TicketResult` | Firma y envía una guía por la API REST de SUNAT | `TicketResult` |
 | `getGuideStatus(string $ticket): CdrResult` | Consulta el estado del ticket de la guía | `CdrResult` |
 
-Requiere inyectar un `GreSender` (p. ej. `Ws\GreClient`). Ver [guía de remisión](/documentos/guia-remision).
+Requiere inyectar un `GreSender` (p. ej. `GreClient`). Ver [guía de remisión](/documentos/guia-remision).
 
 ### Consulta de CPE
 
@@ -127,9 +127,9 @@ El string del QR **no es una URL**: son los diez campos del Anexo N.º 6 unidos 
 `DigestValue`.
 
 > [!WARNING] Solo la familia de venta
-> Ambos métodos soportan **únicamente** `Model\Invoice` (factura y boleta) y `Model\Note` (NC/ND). Con una guía
+> Ambos métodos soportan **únicamente** `Invoice` (factura y boleta) y `Note` (NC/ND). Con una guía
 > de remisión, retención, percepción, resumen diario, comunicación de baja o reversión lanzan
-> `Exception\InvalidDocumentException`: el formato del QR de esas familias no está confirmado contra el anexo
+> `InvalidDocumentException`: el formato del QR de esas familias no está confirmado contra el anexo
 > técnico de SUNAT y se difirió a propósito en vez de inventarlo.
 
 ## Patrón de uso recomendado

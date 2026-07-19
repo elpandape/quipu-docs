@@ -11,7 +11,7 @@ SUNAT, para reportar los montos retenidos a sus proveedores.
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Retention`:
+`Retention`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|

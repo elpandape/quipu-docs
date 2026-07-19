@@ -13,7 +13,7 @@ se emite una **nota de crédito** o **nota de débito** que **referencia el comp
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Note` es un DTO `readonly`. La nota hereda la estructura de un comprobante de venta
+`Note` es un DTO `readonly`. La nota hereda la estructura de un comprobante de venta
 (detalles, totales, leyendas) y añade la **referencia al documento afectado** y el **motivo**:
 
 | Propiedad | Tipo | Notas |

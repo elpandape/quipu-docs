@@ -29,7 +29,7 @@ interface XmlBuilder
 </template>
 </CodeTabs>
 
-Implementación: `Xml\CompositeBuilder` (despacha por tipo) o `Xml\InvoiceBuilder`, `Xml\NoteBuilder`, etc.
+Implementación: `CompositeBuilder` (despacha por tipo) o `InvoiceBuilder`, `NoteBuilder`, etc.
 
 La **versión de UBL la fija el builder**, según lo que SUNAT exige para cada familia: `InvoiceBuilder`,
 `NoteBuilder`, `DespatchBuilder` y `CarrierDespatchBuilder` emiten `cbc:UBLVersionID` **2.1**; `SummaryBuilder`,
@@ -52,7 +52,7 @@ interface Signer
 </template>
 </CodeTabs>
 
-Implementación: `Signer\XmlSecSigner`.
+Implementación: `XmlSecSigner`.
 
 ## `Sender`
 
@@ -80,7 +80,7 @@ interface Sender
 </template>
 </CodeTabs>
 
-Implementación: `Ws\SoapSender`. Sobre esta misma interfaz, **quipu Pro** <Availability pro /> intercala
+Implementación: `SoapSender`. Sobre esta misma interfaz, **quipu Pro** <Availability pro /> intercala
 decoradores de **retry**, **logging** e **idempotencia** —ver [Infraestructura (Pro)](/pro/infra)— y su
 [testing toolkit](/pro/testing) ofrece un `FakeSender` para pruebas sin red.
 
@@ -102,7 +102,7 @@ interface Validator
 </template>
 </CodeTabs>
 
-Implementación: `Validation\CompositeValidator` (despacha a un validador por familia).
+Implementación: `CompositeValidator` (despacha a un validador por familia).
 
 ## `SchemaValidator`
 
@@ -130,7 +130,7 @@ Dos modos para el mismo chequeo: `assertValid()` **lanza**
 encontradas (se concatenan con `; `), no solo la primera; `errorsFor()` **devuelve** la lista y deja la decisión
 al consumidor.
 
-Implementación: `Xml\DocumentSchemaValidator`.
+Implementación: `DocumentSchemaValidator`.
 
 ## `DocumentReader`
 
@@ -149,13 +149,13 @@ interface DocumentReader
 </template>
 </CodeTabs>
 
-Implementación: `Xml\CompositeReader`.
+Implementación: `CompositeReader`.
 
 > [!WARNING] No es un inverso total: la GRE del transportista (31) no tiene lector
 > `CompositeReader` lee todas las familias salvo `CarrierDespatch` (la guía de remisión del transportista,
 > tipoDoc 31): ese brazo lanza `InvalidDocumentException` ("No hay un lector registrado para la guía de remisión
 > de tipo «31»."). Factura, nota, resumen diario, comunicación de baja, reversión, retención, percepción y la GRE
-> del remitente (tipoDoc 09) sí se leen. Ver `Xml\CompositeReader::readDespatchAdvice()`.
+> del remitente (tipoDoc 09) sí se leen. Ver `CompositeReader::readDespatchAdvice()`.
 
 ## `Document`
 
@@ -196,7 +196,7 @@ interface GreSender
 </template>
 </CodeTabs>
 
-Implementación: `Ws\GreClient`.
+Implementación: `GreClient`.
 
 ## `CpeValidator`
 
@@ -215,7 +215,7 @@ interface CpeValidator
 </template>
 </CodeTabs>
 
-Implementación: `Ws\CpeValidityClient`.
+Implementación: `CpeValidityClient`.
 
 ## `CpeStatusService`
 
@@ -235,7 +235,7 @@ interface CpeStatusService
 </template>
 </CodeTabs>
 
-Implementación: `Ws\BillConsultClient`.
+Implementación: `BillConsultClient`.
 
 ## `QrEncoder`
 
@@ -254,7 +254,7 @@ interface QrEncoder
 </template>
 </CodeTabs>
 
-Implementación: `Presentation\SunatQrEncoder`.
+Implementación: `SunatQrEncoder`.
 
 ## `PrintViewBuilder`
 
@@ -273,7 +273,7 @@ interface PrintViewBuilder
 </template>
 </CodeTabs>
 
-Implementación: `Presentation\CompositePrintViewBuilder`.
+Implementación: `CompositePrintViewBuilder`.
 
 ## `Clock`
 
@@ -298,7 +298,7 @@ interface Clock
 > lógica dependiente del tiempo —sobre todo la expiración de los tokens OAuth—, donde un entero es lo que se
 > compara. Si necesitas una fecha, conviértela en tu implementación.
 
-Implementación: `Ws\SystemClock`.
+Implementación: `SystemClock`.
 
 ## `HttpClient`
 
@@ -322,7 +322,7 @@ interface HttpClient
 > `$headers` y `$body` **no tienen valor por default**: los cuatro argumentos son obligatorios. Para un GET sin
 > cuerpo, pasa `[]` y `null` explícitamente.
 
-Implementación: `Ws\CurlHttpClient`.
+Implementación: `CurlHttpClient`.
 
 ## `TokenStore`
 
@@ -352,9 +352,9 @@ store queda a tu elección: memoria, archivo, Redis…
 > El tercer parámetro se llama **`$expiresIn`**, no `$ttlSeconds`. Si usas argumentos nombrados
 > (`$store->put(key: ..., token: ..., expiresIn: 3600)`), el nombre importa.
 
-Implementación: `Ws\InMemoryTokenStore`, que **recibe un `Contract\Clock` obligatorio** en el constructor
+Implementación: `InMemoryTokenStore`, que **recibe un `Clock` obligatorio** en el constructor
 (`new InMemoryTokenStore(new SystemClock())`): el reloj se inyecta para que la expiración sea determinista en
-tests. Se inyecta en `Ws\GreClient` (6.º parámetro) y en `Ws\CpeValidityClient` (4.º parámetro); ver
+tests. Se inyecta en `GreClient` (6.º parámetro) y en `CpeValidityClient` (4.º parámetro); ver
 [endpoints](/referencia/endpoints).
 
 ## Siguiente paso

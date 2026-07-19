@@ -11,7 +11,7 @@ SUNAT, para reportar los montos percibidos de sus clientes.
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Perception`:
+`Perception`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|

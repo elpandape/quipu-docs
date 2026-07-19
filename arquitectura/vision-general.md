@@ -53,40 +53,40 @@ flowchart TB
 La fila de arriba es la **frontera pública** (`Contract\*` + el facade `Quipu`); la de abajo son las
 **implementaciones concretas**. Entre el facade y el `Sender` puede intercalarse una capa **opcional** de
 [decoradores de **quipu Pro**](/pro/infra) <Availability pro /> —retry, logging e idempotencia— sin que el
-dominio se entere: envuelven el `Contract\Sender` respetando la misma interfaz. No confundas
-unas con otras: `Xml\CompositeBuilder` implementa `Contract\XmlBuilder`, `Signer\XmlSecSigner` implementa
-`Contract\Signer` y `Ws\SoapSender` implementa `Contract\Sender` — esas tres **las inyectas tú** al construir
-el facade (no tienen valor por default). `Cdr\CdrParser` es la excepción: no tiene interfaz en `Contract\` y
-queda **detrás** del sender, que lo usa por dentro para convertir el zip del CDR en un `Result\CdrResult`.
+dominio se entere: envuelven el `Sender` respetando la misma interfaz. No confundas
+unas con otras: `CompositeBuilder` implementa `XmlBuilder`, `XmlSecSigner` implementa
+`Signer` y `SoapSender` implementa `Sender` — esas tres **las inyectas tú** al construir
+el facade (no tienen valor por default). `CdrParser` es la excepción: no tiene interfaz en `Contract\` y
+queda **detrás** del sender, que lo usa por dentro para convertir el zip del CDR en un `CdrResult`.
 
 ## El seam (frontera pública)
 
 Todo lo que el consumidor toca son **interfaces** (`Contract\`) y **value objects** (`Model\*`, `Result\*`),
 nunca las clases concretas de firma o transporte:
 
-- `Contract\Document` — el **tipo de entrada** de casi toda la API: lo implementan los `Model\*` (`Invoice`,
+- `Document` — el **tipo de entrada** de casi toda la API: lo implementan los `Model\*` (`Invoice`,
   `Note`, `Despatch`…) y expone `documentType(): DocumentType` y `fileName(): string` (el nombre base del
   archivo SUNAT, p. ej. `20000000001-01-F001-1`). Es lo que reciben builder, validadores y fachada.
-- `Contract\XmlBuilder` — `build(Document): string` (XML sin firmar).
-- `Contract\Signer` — `sign(string $xml): SignedXml` (XML firmado + digest).
-- `Contract\Sender` — `sendBill`, `sendSummary`, `sendPack`, `getStatus`, `getPackStatus`.
-- `Contract\Validator` — `errorsFor(Document): list<string>` (violaciones de reglas de SUNAT).
-- `Contract\SchemaValidator` — validación contra el XSD de SUNAT, con dos métodos:
+- `XmlBuilder` — `build(Document): string` (XML sin firmar).
+- `Signer` — `sign(string $xml): SignedXml` (XML firmado + digest).
+- `Sender` — `sendBill`, `sendSummary`, `sendPack`, `getStatus`, `getPackStatus`.
+- `Validator` — `errorsFor(Document): list<string>` (violaciones de reglas de SUNAT).
+- `SchemaValidator` — validación contra el XSD de SUNAT, con dos métodos:
   `assertValid(Document, string $xml): void` (lanza `InvalidDocumentException`) y
   `errorsFor(Document, string $xml): array` (devuelve las violaciones; es el que usa la fachada).
-- `Contract\DocumentReader` — `read(string $xml): Document` (XML → Model, inverso de build, salvo la GRE del
+- `DocumentReader` — `read(string $xml): Document` (XML → Model, inverso de build, salvo la GRE del
   transportista `CarrierDespatch`, tipoDoc 31, que aún no tiene lector y lanza `InvalidDocumentException`).
-- `Contract\QrEncoder` — `encode(Document, SignedXml): string` (el string del QR de SUNAT).
-- `Contract\PrintViewBuilder` — `build(Document, SignedXml): PrintView` (la vista de impresión tipada).
+- `QrEncoder` — `encode(Document, SignedXml): string` (el string del QR de SUNAT).
+- `PrintViewBuilder` — `build(Document, SignedXml): PrintView` (la vista de impresión tipada).
 - `Quipu` (facade) orquesta todo.
 
 Alrededor de ese núcleo hay contratos **periféricos**, que solo tocas si usas la función que cubren:
-`Contract\GreSender` (guías de remisión por REST), `Contract\CpeValidator` (consulta de validez de CPE de
-terceros), `Contract\CpeStatusService` (estado de tu propio CPE), y los de soporte `Contract\Clock`,
-`Contract\HttpClient` y `Contract\TokenStore` (reloj inyectable, transporte HTTP y caché del token OAuth).
+`GreSender` (guías de remisión por REST), `CpeValidator` (consulta de validez de CPE de
+terceros), `CpeStatusService` (estado de tu propio CPE), y los de soporte `Clock`,
+`HttpClient` y `TokenStore` (reloj inyectable, transporte HTTP y caché del token OAuth).
 
 > [!IMPORTANT]
-> Las implementaciones reales (`Signer\XmlSecSigner`, `Ws\SoapSender`) se **inyectan por constructor**. Así el
+> Las implementaciones reales (`XmlSecSigner`, `SoapSender`) se **inyectan por constructor**. Así el
 > consumidor las **mockea** en tests y puede sustituir el transporte sin tocar el dominio. El facade **nunca**
 > instancia `new SoapClient` por dentro de forma oculta.
 
@@ -103,7 +103,7 @@ terceros), `Contract\CpeStatusService` (estado de tu propio CPE), y los de sopor
 ## Qué NO va en el core
 
 Persistencia, correlativos, estados, *scheduling*, configuración de framework y PDF. Todo eso es del
-consumidor. quipu recibe un `Model\*` ya armado (implementa `Contract\Document`) y devuelve un `Result\*`; no
+consumidor. quipu recibe un `Model\*` ya armado (implementa `Document`) y devuelve un `Result\*`; no
 sabe de bases de datos.
 
 ## Siguiente paso

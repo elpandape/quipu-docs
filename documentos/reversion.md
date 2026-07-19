@@ -8,7 +8,7 @@ el esquema y el flujo asíncrono de la Comunicación de Baja (RA), pero usa el p
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Reversion` tiene la misma estructura que `Voidance`:
+`Reversion` tiene la misma estructura que `Voidance`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|

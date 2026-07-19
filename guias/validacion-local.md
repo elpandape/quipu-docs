@@ -171,7 +171,7 @@ Es lo que SUNAT exige: los documentos consolidados y los de otrosCpe siguen ancl
 
 ## Validación solo de esquema
 
-Para validar **solo** el XSD, sin las reglas de negocio, inyecta `Xml\DocumentSchemaValidator` y llámalo
+Para validar **solo** el XSD, sin las reglas de negocio, inyecta `DocumentSchemaValidator` y llámalo
 directo:
 
 <CodeTabs>

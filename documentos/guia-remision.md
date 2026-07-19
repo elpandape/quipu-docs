@@ -7,7 +7,7 @@ otro. A diferencia del resto de comprobantes, la GRE **no se envía por SOAP**: 
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Despatch`:
+`Despatch`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|
@@ -109,7 +109,7 @@ $tokenStore = null`) y, sin él, `OAuthAuthenticator::token()` pide un `access_t
 y **cada** consulta de ticket. Un bucle de polling de 10 vueltas son 10 autenticaciones de más.
 :::
 
-Para activarlo, inyecta una implementación de `ElPandaPe\Quipu\Contract\TokenStore`. quipu trae
+Para activarlo, inyecta una implementación de `TokenStore`. quipu trae
 `InMemoryTokenStore`, que cachea en memoria durante la vida del objeto y recibe un `Clock`:
 
 <CodeTabs>

@@ -83,7 +83,7 @@ Cada `XmlDifference` clasifica el tipo de discrepancia con el enum `DifferenceKi
 
 ## Conversor a JSON: `JsonConverter`
 
-`JsonConverter` proyecta cualquier `Document` de quipu (un `Model\Invoice`, `Note`, etc.) a un arreglo o a una
+`JsonConverter` proyecta cualquier `Document` de quipu (un `Invoice`, `Note`, etc.) a un arreglo o a una
 cadena JSON. Útil para logs estructurados, colas, APIs internas o snapshots de depuración.
 
 <CodeTabs>

@@ -170,7 +170,7 @@ Método `tribute()`: mapea la afectación al `Tribute` que aplica.
 
 ## Catálogo 12 — Documento relacionado (`RelatedDocumentType`)
 
-Va en `cbc:DocumentTypeCode` dentro de `cac:AdditionalDocumentReference`; se usa desde `Model\RelatedDocument`.
+Va en `cbc:DocumentTypeCode` dentro de `cac:AdditionalDocumentReference`; se usa desde `RelatedDocument`.
 El catálogo oficial tiene **solo 6 códigos**; los códigos `06`–`10` aparecen en un único mirror no oficial de
 2020 y **quedan sin tipar** por no poder confirmarse contra una fuente primaria.
 
@@ -297,9 +297,9 @@ como "que afecta la base", más el anticipo gravado.
 > Guíate por la columna de la tabla, no por el rango del código.
 
 > [!IMPORTANT] Códigos con modelo propio o sin implementar
-> - **`51`, `52`, `53` (percepciones)** se modelan con [`Model\SalePerception`](/referencia/modelos) cuando van
+> - **`51`, `52`, `53` (percepciones)** se modelan con [`SalePerception`](/referencia/modelos) cuando van
 >   embebidas en una factura, **no** con el array genérico `Invoice::$allowanceCharges`:
->   `Validation\InvoiceValidator` los **rechaza** ahí.
+>   `InvoiceValidator` los **rechaza** ahí.
 > - **`61`** (retención de renta embebida) **no tiene modelo todavía**: sus mecánicas dentro de una factura no
 >   están confirmadas, así que queda pendiente. Se excluye defensivamente —junto con `51`–`53`— del reparto
 >   `AllowanceTotalAmount`/`ChargeTotalAmount` para que no descuadre el importe a pagar si aun así lo colocas
@@ -401,7 +401,7 @@ Va en `cbc:PaymentMeansCode`; se usa desde `Detraction::$paymentMethod`. **22 ca
 
 Específico de la **guía de remisión electrónica** (GRE 2.0, R.S. 000123-2022/SUNAT); va en
 `cbc:DocumentTypeCode` del `cac:AdditionalDocumentReference` raíz, con `listURI` de `catalogo61`. Se usa desde
-`Model\GreRelatedDocument`. **No confundir con el Cat. 12**, que es genérico a los documentos de venta.
+`GreRelatedDocument`. **No confundir con el Cat. 12**, que es genérico a los documentos de venta.
 
 | Case | Código | Documento |
 |---|---|---|
@@ -444,7 +444,7 @@ del enum **es el token literal de SUNAT**, prefijo incluido — no hay un códig
 ## Catálogos 63/64 — Puerto o aeropuerto (`PortLocationType`)
 
 Tipo del primer punto de llegada (`cac:Shipment/cac:FirstArrivalPortLocation`) de un traslado de
-importación/exportación: puerto marítimo (Cat. 63) o aeropuerto (Cat. 64). Se usa desde `Model\PortLocation`.
+importación/exportación: puerto marítimo (Cat. 63) o aeropuerto (Cat. 64). Se usa desde `PortLocation`.
 
 > [!IMPORTANT]
 > Es el **único enum sin backing** de `Catalog\`: `enum PortLocationType` (sin `: string`). No tiene `->value`;
@@ -508,15 +508,15 @@ SummaryStatus::Cancel;  // '3' — anular
 
 ## Catálogos de referencia (no enums)
 
-`Reference\CatalogRepository` trae los catálogos **tabulares** de SUNAT —los que corren en cientos o miles de
+`CatalogRepository` trae los catálogos **tabulares** de SUNAT —los que corren en cientos o miles de
 filas y no se modelan como enums— como mapas planos `código => descripción`, leídos una sola vez desde archivos
 PHP embebidos en `resources/catalog/`. Existe para **validar** códigos ya elegidos (propios o de terceros)
-contra la tabla completa, no para construir documentos: el enum curado `Catalog\UnitOfMeasure` sigue siendo lo
+contra la tabla completa, no para construir documentos: el enum curado `UnitOfMeasure` sigue siendo lo
 que usas al armar un `SaleDetail`; el repositorio es lo que te dice si un código que **llegó** de fuera existe
 de verdad.
 
 ::: tip Curado vs. completo
-`Catalog\UnitOfMeasure` son 22 unidades comerciales comunes para *construir*. El `CatalogRepository` trae las
+`UnitOfMeasure` son 22 unidades comerciales comunes para *construir*. El `CatalogRepository` trae las
 **2136** entradas de la Recomendación 20 de UN/ECE para *validar* cualquier código que llegue, aunque no esté en
 el enum. Esos son dos papeles distintos a propósito.
 :::
@@ -590,7 +590,7 @@ La clase es `readonly` e inmutable: cada tabla se lee una sola vez, al construir
 
 ### Cómo se consume
 
-El repositorio por sí solo no valida nada; es `Validation\CatalogValidator` quien lo consulta. Ese validador es
+El repositorio por sí solo no valida nada; es `CatalogValidator` quien lo consulta. Ese validador es
 **opt-in** (no forma parte del `CompositeValidator` por defecto) y hoy solo juzga `Invoice` y `Note`. Ver
 [Validación local — Validación de catálogos](/guias/validacion-local#validacion-de-catalogos-opt-in) para
 activarlo.
@@ -598,7 +598,7 @@ activarlo.
 ::: warning Qué protección real añade la tabla
 No todos los campos se benefician por igual de la tabla completa:
 - **Unidades (Cat. 03)**: **no** son una brecha. `SaleDetail::$unit` está tipado con el enum
-  `Catalog\UnitOfMeasure`, así que una unidad inválida es inconstruible — la tabla del repositorio no añade
+  `UnitOfMeasure`, así que una unidad inválida es inconstruible — la tabla del repositorio no añade
   protección ahí.
 - **País (`Address::$country`)**: string plano con default `'PE'` — aquí sí gana: sin la tabla, cualquier
   código pasa.

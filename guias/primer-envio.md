@@ -90,7 +90,7 @@ Para tu primera prueba contra beta, las credenciales públicas ya vienen concate
 ::: warning El formato se INVIERTE en la Consulta Integrada (REST)
 No todas las APIs de SUNAT usan `RUC + usuario SOL`. La **Consulta Integrada de Validez del CPE** (comprobantes de
 terceros, REST/OAuth) **no** usa usuario ni clave SOL: autentica con `grant_type=client_credentials`, y
-`Ws\CpeValidityCredentials` recibe **3** argumentos —`(clientId, clientSecret, consultantRuc)`— donde `consultantRuc`
+`CpeValidityCredentials` recibe **3** argumentos —`(clientId, clientSecret, consultantRuc)`— donde `consultantRuc`
 es el **RUC a secas**, sin concatenar, y no hay parámetro de contraseña. Resumen:
 
 - **SOAP** (emisión **y** `billConsultService`, tu propio CPE): `RUC + usuarioSOLSecundario`.

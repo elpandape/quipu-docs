@@ -62,7 +62,7 @@ colapsó un duplicado.
 
 ## Nombre del lote
 
-SUNAT espera un nombre de lote con la convención `{ruc}-LT-{yyyymmdd}-{correlativo}.zip`. Usa `Ws\BatchNamer`:
+SUNAT espera un nombre de lote con la convención `{ruc}-LT-{yyyymmdd}-{correlativo}.zip`. Usa `BatchNamer`:
 
 <CodeTabs>
 <template #php>
@@ -139,7 +139,7 @@ function pollPack(Quipu $quipu, string $ticket): array
 
 ::: warning El único discriminante es el mensaje
 `TransportException` **no expone el `statusCode` de SUNAT** — no lleva código ni propiedad alguna, solo el
-mensaje (`Exception\TransportException` extiende `QuipuException`, que extiende `RuntimeException`). Y quipu
+mensaje (`TransportException` extiende `QuipuException`, que extiende `RuntimeException`). Y quipu
 lanza la **misma clase** para el CDR vacío, para un `statusCode` inesperado y para un SOAP Fault
 (`SunatFaultException` **extiende** `TransportException`, así que también entra en ese `catch`).
 

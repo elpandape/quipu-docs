@@ -24,7 +24,7 @@ Revisa cuál aplica a tu caso.
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\Voidance`:
+`Voidance`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|

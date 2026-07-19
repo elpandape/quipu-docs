@@ -10,7 +10,7 @@ paralelo— sin construir un documento entero.
 ## Dinero exacto: `Soles`
 
 Los calculadores no trabajan con `float`: reciben y devuelven un `Brick\Money\Money` para evitar los errores de
-redondeo del coma flotante. La clase `Value\Soles` es el puente: crea un `Money` en soles, lo lleva a `float` y
+redondeo del coma flotante. La clase `Soles` es el puente: crea un `Money` en soles, lo lleva a `float` y
 da el cero.
 
 <CodeTabs>
@@ -82,7 +82,7 @@ $rate = $isc->effectiveRate(Soles::of('17.00'), Soles::of('100.00'));  // 17.0
 </template>
 </CodeTabs>
 
-Para meter un ISC en una línea del builder no usas el calculador directo, sino `Value\IscInput`, que lo declara
+Para meter un ISC en una línea del builder no usas el calculador directo, sino `IscInput`, que lo declara
 por sistema: `IscInput::value($rate)`, `IscInput::fixed($perUnit)`, `IscInput::retail($pvp, $rate)`.
 
 ## IVAP — `IvapCalculator`
@@ -128,7 +128,7 @@ echo Soles::toFloat($amount);
 </template>
 </CodeTabs>
 
-En el builder esto se expresa con `Value\IcbperInput::forYear($year)` o `IcbperInput::withFactor($factor)`, o con
+En el builder esto se expresa con `IcbperInput::forYear($year)` o `IcbperInput::withFactor($factor)`, o con
 los atajos `icbperYear:` / `icbperFactor:` de `addLine()`.
 
 ## Detracción (SPOT) — `DetractionCalculator`

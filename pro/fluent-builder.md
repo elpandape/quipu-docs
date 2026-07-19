@@ -2,7 +2,7 @@
 
 <Availability pro />
 
-Armar un `Model\Invoice` a mano es correcto pero verboso: tienes que calcular cada `igvAmount`, cada
+Armar un `Invoice` a mano es correcto pero verboso: tienes que calcular cada `igvAmount`, cada
 `taxableAmount`, poner la leyenda del importe en letras, y cuadrar los totales de cabecera con la suma de las
 líneas o SUNAT rechaza el subtotal. El **Fluent Builder** de Pro hace todo eso por ti: declaras las partes, los
 metadatos y las líneas, y `build()` liquida los impuestos, agrega la cabecera y ensambla un documento **que los

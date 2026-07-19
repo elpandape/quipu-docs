@@ -1,6 +1,6 @@
 # Resultados
 
-Esta página documenta los **value objects `readonly`** tipados bajo `ElPandaPe\Quipu\Result\` — el tipo de
+Esta página documenta los **value objects `readonly`** tipados bajo `Result\` — el tipo de
 retorno de `sign()`, `emit*()` y el polling de tickets.
 
 <Availability lite pro />

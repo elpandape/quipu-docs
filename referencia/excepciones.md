@@ -1,6 +1,6 @@
 # Excepciones
 
-quipu tiene una **jerarquía de excepciones de dominio** bajo `ElPandaPe\Quipu\Exception\`. Todas heredan de
+quipu tiene una **jerarquía de excepciones de dominio** bajo `Exception\`. Todas heredan de
 `QuipuException`, así que puedes atrapar todas las fallas de quipu con un solo `catch`.
 
 <Availability lite pro />
@@ -55,10 +55,10 @@ vuelta—. La lanzan cinco frentes:
 | Origen | Cuándo |
 |---|---|
 | `Quipu::assertValid()` | El documento viola reglas de negocio de SUNAT o su XSD |
-| `Contract\SchemaValidator::assertValid()` | El XML construido no coincide con el esquema |
-| `Contract\DocumentReader::read()` | El XML no se puede parsear, o su tipo no tiene lector registrado |
+| `SchemaValidator::assertValid()` | El XML construido no coincide con el esquema |
+| `DocumentReader::read()` | El XML no se puede parsear, o su tipo no tiene lector registrado |
 | `Quipu::qrString()` / `Quipu::printable()` | La familia del documento no tiene QR ni proyección de impresión |
-| `Cdr\CdrParser` (vía `sendBill()`/`emitInvoice()` y el polling de tickets) | El CDR que devuelve SUNAT no se puede descomprimir o no tiene la estructura esperada |
+| `CdrParser` (vía `sendBill()`/`emitInvoice()` y el polling de tickets) | El CDR que devuelve SUNAT no se puede descomprimir o no tiene la estructura esperada |
 
 <CodeTabs>
 <template #php>
@@ -93,7 +93,7 @@ try {
 </CodeTabs>
 
 ::: danger Un CDR corrupto lanza `InvalidDocumentException` — el fallo es de SUNAT, no de tu documento
-`sendBill()` y `emitInvoice()` parsean el CDR que SUNAT devuelve con `Cdr\CdrParser`; el polling de tickets
+`sendBill()` y `emitInvoice()` parsean el CDR que SUNAT devuelve con `CdrParser`; el polling de tickets
 (`getStatus()`, `getPackStatus()`, `getGuideStatus()`) hace lo mismo. Si ese CDR llega corrupto —ZIP sin abrir,
 sin XML, o sin `ResponseCode`— quipu lanza `InvalidDocumentException` con mensajes como
 «CDR ZIP could not be opened.» o «CDR has no response code.». Es la **misma excepción** que `assertValid()` usa
@@ -199,7 +199,7 @@ comprobante roto y **nunca se reintenta**. Mira el `faultCode` antes de decidir.
 ### `fromSoapFault()`
 
 Factory estática pública que construye la excepción a partir de un `SoapFault` crudo, enriqueciendo el mensaje
-con la traducción del `Error\ErrorCatalog` cuando el código es conocido (si no, usa el `faultstring` de SUNAT):
+con la traducción del `ErrorCatalog` cuando el código es conocido (si no, usa el `faultstring` de SUNAT):
 
 <CodeTabs>
 <template #php>
@@ -232,7 +232,7 @@ catch (SunatFaultException $e) {
 </template>
 </CodeTabs>
 
-Te resulta útil si envuelves tu propio `SoapClient`: es el mismo camino que usa `Ws\SoapSender` internamente.
+Te resulta útil si envuelves tu propio `SoapClient`: es el mismo camino que usa `SoapSender` internamente.
 
 ::: tip SOAP Fault ≠ CDR rechazado
 Un `SunatFaultException` es una falla **síncrona**: SUNAT respondió con un Fault en vez de procesar el envío

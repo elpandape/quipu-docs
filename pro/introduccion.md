@@ -11,14 +11,14 @@ ni llamadas de red propias— sobre las mismas interfaces que ya conoces.
 
 La división es deliberada:
 
-- **Lite** es el emisor completo: si sabes armar un `Model\Invoice` correcto, Lite lo emite. Es la maquinaria.
+- **Lite** es el emisor completo: si sabes armar un `Invoice` correcto, Lite lo emite. Es la maquinaria.
 - **Pro** es el andamiaje alrededor de esa maquinaria: builders fluidos que producen documentos válidos desde
   inputs mínimos, un motor tributario que calcula IGV/ISC/IVAP/ICBPER/detracción/percepción/retención por ti,
   validadores estrictos y cruzados, diagnóstico accionable de rechazos, decoradores de reintento/logging/
   idempotencia sobre el transporte, utilidades de certificados y de inspección de XML, y un toolkit de testing
   para probar la integración con SUNAT sin red ni certificado.
 
-Todo lo que Pro añade **implementa los contratos de Lite** (`Contract\Validator`, `Contract\Sender`, etc.), así
+Todo lo que Pro añade **implementa los contratos de Lite** (`Validator`, `Sender`, etc.), así
 que puedes adoptarlo pieza por pieza o de golpe con la fachada.
 
 ## Instalación

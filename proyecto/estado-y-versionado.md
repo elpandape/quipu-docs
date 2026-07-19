@@ -37,7 +37,7 @@ comprobante). Cada familia tiene su *builder* XML y su validador de reglas de ne
 | Comunicación de baja | `RA` | `VoidedBuilder` |
 | Resumen de reversiones | `RR` | `ReversionBuilder` |
 
-Los códigos viven en el enum `Catalog\DocumentType` (`src/Catalog/DocumentType.php`), que también expone el
+Los códigos viven en el enum `DocumentType` (`src/Catalog/DocumentType.php`), que también expone el
 nombre en español para la representación impresa.
 
 ### Calidad y CI
@@ -101,15 +101,15 @@ sin considerarse un *breaking change*. No acoples tu código a ellos:
   `AbstractVoidedDocumentsBuilder`, `AbstractVoidedDocumentsReader`). Su forma exacta es un asunto interno.
 - **Los *builders* concretos** — `InvoiceBuilder`, `NoteBuilder`, `SummaryBuilder`, `VoidedBuilder`,
   `RetentionBuilder`, `PerceptionBuilder`, `ReversionBuilder`, `DespatchBuilder`, `CarrierDespatchBuilder` y el
-  `CompositeBuilder`. El facade los orquesta por ti; tú dependes de la interfaz `Contract\XmlBuilder`.
-- **El *plumbing* SOAP y REST** — `Ws\SoapClientSupport` (el *trait* con la montura SOAP 1.1 + WS-Security),
-  `Ws\SoapSender`, `Ws\GreClient`, `Ws\CpeValidityClient`, `Ws\BillConsultClient`, `Ws\OAuthAuthenticator` y
-  `Ws\CurlHttpClient`. Son clases concretas que envuelven `SoapClient` y curl; se abstraen detrás de
-  `Contract\Sender`, `Contract\GreSender`, `Contract\CpeValidator`, `Contract\CpeStatusService` e
-  `Contract\HttpClient`.
+  `CompositeBuilder`. El facade los orquesta por ti; tú dependes de la interfaz `XmlBuilder`.
+- **El *plumbing* SOAP y REST** — `SoapClientSupport` (el *trait* con la montura SOAP 1.1 + WS-Security),
+  `SoapSender`, `GreClient`, `CpeValidityClient`, `BillConsultClient`, `OAuthAuthenticator` y
+  `CurlHttpClient`. Son clases concretas que envuelven `SoapClient` y curl; se abstraen detrás de
+  `Sender`, `GreSender`, `CpeValidator`, `CpeStatusService` e
+  `HttpClient`.
 
 ::: warning No heredes ni instancies directamente lo interno
-Si necesitas un `XmlBuilder` distinto, implementa `Contract\XmlBuilder` e inyéctalo en el facade. Subclasificar
+Si necesitas un `XmlBuilder` distinto, implementa `XmlBuilder` e inyéctalo en el facade. Subclasificar
 `AbstractUblBuilder` o instanciar `SoapSender` a mano te acopla a internos que pueden moverse o renombrarse.
 :::
 
@@ -148,7 +148,7 @@ El proceso para detectar esos cambios y reaccionar está documentado en
 | `ext-dom` | Construcción y lectura del XML UBL 2.1 |
 | `ext-openssl` | Firma xmldsig y manejo del certificado |
 | `ext-zip` | Compresión del XML en ZIP para el envío |
-| `ext-curl` | **Condicional.** Solo si usas el `Ws\CurlHttpClient` incluido (transporte HTTP de la GRE REST y de la Consulta de CPE). No está en `require`: `GreClient` y `CpeValidityClient` reciben un `Contract\HttpClient` por constructor, así puedes inyectar tu propio cliente (Guzzle, Symfony HttpClient) y omitir curl. |
+| `ext-curl` | **Condicional.** Solo si usas el `CurlHttpClient` incluido (transporte HTTP de la GRE REST y de la Consulta de CPE). No está en `require`: `GreClient` y `CpeValidityClient` reciben un `HttpClient` por constructor, así puedes inyectar tu propio cliente (Guzzle, Symfony HttpClient) y omitir curl. |
 
 `robrichards/xmlseclibs ^3.1` es la única dependencia de runtime: la firma y la canonicalización C14N se apoyan
 en ella. El detalle de instalación y contenedores Docker está en [Instalación](/empezando/instalacion).

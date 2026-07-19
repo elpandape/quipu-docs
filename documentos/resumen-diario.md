@@ -8,7 +8,7 @@ consultando el estado del ticket.
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\DailySummary`:
+`DailySummary`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|

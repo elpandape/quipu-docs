@@ -14,7 +14,7 @@ OAuth de la GRE; lo que las distingue es el `cbc:DespatchAdviceTypeCode` (`09` v
 
 ## Modelo
 
-`ElPandaPe\Quipu\Model\CarrierDespatch`:
+`CarrierDespatch`:
 
 | Propiedad | Tipo | Notas |
 |---|---|---|
@@ -38,7 +38,7 @@ ejemplo de esta página) y el problema desaparece.
 
 ### `Carrier`
 
-`ElPandaPe\Quipu\Model\Carrier`. **Sin valores por defecto**: los cuatro campos son obligatorios en el
+`Carrier`. **Sin valores por defecto**: los cuatro campos son obligatorios en el
 constructor.
 
 | Propiedad | Tipo | Notas |
@@ -56,7 +56,7 @@ constructor.
 
 ## Validación local
 
-`ElPandaPe\Quipu\Validation\CarrierDespatchValidator` (incluido en el `CompositeValidator` por defecto de la
+`CarrierDespatchValidator` (incluido en el `CompositeValidator` por defecto de la
 fachada `Quipu`) revisa la `31` y devuelve errores para estos siete casos:
 
 1. El transportista **no se identifica con RUC**.
