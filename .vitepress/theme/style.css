@@ -1,0 +1,141 @@
+/*
+ * Custom styles for quipu docs components (<CodeTabs>, <Availability>).
+ * Theme-aware: uses VitePress's own CSS variables plus a small set of quipu
+ * brand tokens, and adapts to light/dark via the `.dark` class VitePress sets
+ * on <html>.
+ */
+
+:root {
+  /* Marca green (#3aa675). `--quipu-brand` is a darker, AA-contrast shade for
+     text/borders on light backgrounds; `--quipu-brand-strong` is the raw marca. */
+  --quipu-brand: #2c8c63;
+  --quipu-brand-strong: #3aa675;
+  --quipu-brand-soft: rgba(58, 166, 117, 0.12);
+  --quipu-danger: #b4283a;
+  --quipu-danger-soft: rgba(180, 40, 58, 0.1);
+}
+
+.dark {
+  --quipu-brand: #4ec08c;
+  --quipu-brand-strong: #3aa675;
+  --quipu-brand-soft: rgba(58, 166, 117, 0.16);
+  --quipu-danger: #f0808f;
+  --quipu-danger-soft: rgba(240, 128, 143, 0.14);
+}
+
+/* ------------------------------------------------------------------ CodeTabs */
+
+.code-tabs {
+  margin: 16px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--vp-c-bg-soft);
+}
+
+.code-tabs__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+
+.code-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.code-tabs__tab:hover:not(.is-disabled) {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-default-soft);
+}
+
+.code-tabs__tab.is-active {
+  color: var(--quipu-brand);
+  background: var(--quipu-brand-soft);
+}
+
+.code-tabs__tab.is-disabled {
+  color: var(--vp-c-text-3);
+  cursor: not-allowed;
+}
+
+.code-tabs__soon {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-3);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Let the code block sit flush inside the panel: strip its own margin/radius. */
+.code-tabs__panel > :first-child {
+  margin: 0;
+}
+
+.code-tabs__panel :deep([class*='language-']) {
+  margin: 0;
+  border-radius: 0;
+}
+
+.code-tabs__placeholder {
+  margin: 0;
+  padding: 24px 16px;
+  color: var(--vp-c-text-3);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* -------------------------------------------------------------- Availability */
+
+.availability {
+  display: inline-flex;
+  gap: 6px;
+  vertical-align: middle;
+}
+
+.availability__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.availability__item.is-yes {
+  color: var(--quipu-brand);
+  background: var(--quipu-brand-soft);
+  border-color: var(--quipu-brand-strong);
+}
+
+.availability__item.is-no {
+  color: var(--quipu-danger);
+  background: var(--quipu-danger-soft);
+  border-color: var(--quipu-danger);
+}
+
+.availability__mark {
+  font-size: 12px;
+  font-weight: 700;
+}
