@@ -19,6 +19,7 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "mermaid": "^11.16.0",
     "vitepress-plugin-mermaid": "^2.0.17"
   }
