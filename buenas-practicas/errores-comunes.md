@@ -61,7 +61,7 @@ inglés**): `The PEM does not contain an X.509 certificate.` o `The PEM does not
 
 **Causa**: puede ser que el PEM solo tenga el certificado o solo la llave (falta uno de los dos), **o** que el
 PEM esté completo pero la llave **tenga passphrase**. `XmlSecSigner` valida la llave con
-`openssl_pkey_get_private()` **sin contraseña** (ver `src/Signer/XmlSecSigner.php`), así que una llave cifrada
+`openssl_pkey_get_private()` **sin contraseña**, así que una llave cifrada
 —justo lo que produces al exportar el `.pfx` sin `-nodes`— da el mismo error que si faltara.
 
 **Solución**: el PEM debe tener **certificado + llave privada concatenados, sin passphrase**. Si partes de un

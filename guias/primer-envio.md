@@ -32,11 +32,11 @@ mensajes del core están **en inglés**):
 valida en dos puntos distintos antes de firmar:
 
 - La **llave**: `openssl_pkey_get_private($certificate)` se llama **sin contraseña**
-  (`src/Signer/XmlSecSigner.php:183`), así que una llave protegida con passphrase —justo lo que produces al exportar
+  así que una llave protegida con passphrase —justo lo que produces al exportar
   el `.pfx` **sin** `-nodes`— da el mismo error que si la llave faltara. También falla si el PEM trae solo el
   certificado.
 - El **certificado**: un regex busca el bloque `-----BEGIN CERTIFICATE-----`; si no está (PEM con solo la llave),
-  lanza la otra excepción (`src/Signer/XmlSecSigner.php:201-211`).
+  lanza la otra excepción.
 
 **Arreglo**: regenera el PEM con ambos bloques y sin passphrase:
 
@@ -64,7 +64,7 @@ SOL secundario**. Es un formato traicionero porque se ve como un RUC "deformado"
 añades un guion, SUNAT responde con un fault de credenciales:
 
 - `examples/emit-invoice-beta.php:47` → `'20000000001MODDATOS'` (RUC `20000000001` + usuario `MODDATOS`).
-- `src/Ws/SoapSender.php:48` lo documenta en el parámetro `$username` del constructor.
+- El constructor de `SoapSender` lo documenta en su parámetro `$username`.
 
 **Arreglo**: arma el usuario concatenando, sin separador:
 
@@ -107,7 +107,7 @@ resolución DNS o handshake de SSL. SUNAT nunca devolvió un CDR ni un fault est
 
 **Causa**: a diferencia de un fault (que es una respuesta SOAP válida con un código de error), esto es un fallo
 **de transporte**: el `SoapClient` de PHP no logró completar la petición. `SoapClientSupport::call()` envuelve
-cualquier `Throwable` que no sea un `SoapFault` en una `TransportException` (`src/Ws/SoapClientSupport.php:62-66`),
+cualquier `Throwable` que no sea un `SoapFault` en una `TransportException`,
 mientras que los `SoapFault` sí pasan a `SunatFaultException`. Por eso **el tipo de excepción ya te dice en qué capa
 estás**.
 
@@ -147,7 +147,7 @@ normal. Reintentar tiene sentido para el primero; para el segundo hay que correg
 ## Serie + correlativo repetido
 
 **Síntoma**: al reenviar el mismo ejemplo (p. ej. `F001-1`), SUNAT lo rechaza. El catálogo de SUNAT lo tipifica como
-`402`: *"La numeracion o nombre del documento ya ha sido enviado anteriormente"* (`src/Error/ErrorCatalog.php`); en
+`402`: *"La numeracion o nombre del documento ya ha sido enviado anteriormente"*; en
 beta puede llegar como `SunatFaultException` con ese `faultCode`.
 
 **Causa**: SUNAT beta (y producción) no acepta un `(serie, correlativo)` que ya envió. Cuando copias el ejemplo de
@@ -183,18 +183,18 @@ sistema con bloqueo atómico, no lo editas para destrabar un envío. Ver [inicio
 ## Rechazo 3244 — Forma de Pago (tipo de transacción)
 
 **Síntoma**: el CDR viene rechazado con código `3244`: *"Debe consignar la informacion del tipo de transaccion del
-comprobante"* (catálogo de SUNAT, `src/Error/ErrorCatalog.php`). Es el rechazo de "falta la forma de pago / tipo de
+comprobante"* (catálogo de SUNAT). Es el rechazo de "falta la forma de pago / tipo de
 transacción".
 
 **Causa**: con quipu **no deberías verlo por el camino normal**. `InvoiceBuilder` **siempre** emite el bloque
-`cac:PaymentTerms[ID=FormaPago]`: el default del modelo es `PaymentForm::Cash` (`src/Model/Invoice.php:62`, un enum
-no-nullable) y el builder lo escribe tanto para `Cash` como para `Credit` (`src/Xml/InvoiceBuilder.php:262-281`).
+`cac:PaymentTerms[ID=FormaPago]`: el default del modelo es `PaymentForm::Cash` (un enum
+no-nullable) y el builder lo escribe tanto para `Cash` como para `Credit`.
 Así que un `3244` ("falta el bloque") significa que **el comprobante que llegó a SUNAT no lo construyó
 `InvoiceBuilder`**: un builder propio, un XML armado a mano, o el nodo removido en algún post-procesado.
 
 **Arreglo**: emite a través del builder de quipu (`InvoiceBuilder`, o `CompositeBuilder` si emites varios tipos) y
 no elimines el bloque de pago. Si vendes al crédito, pasa `PaymentForm::Credit` **con** sus `installments`: el
-validador local de quipu rechaza un crédito sin cuotas (`src/Validation/InvoiceValidator.php:579-580`), y el builder
+validador local de quipu rechaza un crédito sin cuotas, y el builder
 emite una rama `cac:PaymentTerms` por cada una. Valida antes de enviar para descubrirlo sin gastar un envío:
 
 <CodeTabs>

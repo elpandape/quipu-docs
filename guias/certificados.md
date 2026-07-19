@@ -61,7 +61,7 @@ openssl pkcs12 -in certificado.pfx -out certificate.pem -nodes -clcerts
 - **`-nodes`** quita la passphrase (quipu espera una llave sin passphrase).
 - **`-clcerts`** exporta **solo el certificado del titular** (el *leaf*), descartando los certificados de la CA.
   Importa porque `XmlSecSigner::extractCertificate()` incrusta en la firma **únicamente el primer bloque
-  `-----BEGIN CERTIFICATE-----`** del PEM (ver `src/Signer/XmlSecSigner.php`): sin `-clcerts`, el PEM puede traer
+  `-----BEGIN CERTIFICATE-----`** del PEM: sin `-clcerts`, el PEM puede traer
   varios bloques y, si el primero no es tu certificado, quipu firma con tu llave privada pero publica el
   certificado equivocado.
 

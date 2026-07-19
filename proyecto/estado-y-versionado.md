@@ -37,7 +37,7 @@ comprobante). Cada familia tiene su *builder* XML y su validador de reglas de ne
 | Comunicación de baja | `RA` | `VoidedBuilder` |
 | Resumen de reversiones | `RR` | `ReversionBuilder` |
 
-Los códigos viven en el enum `DocumentType` (`src/Catalog/DocumentType.php`), que también expone el
+Los códigos viven en el enum `DocumentType`, que también expone el
 nombre en español para la representación impresa.
 
 ### Calidad y CI
@@ -55,7 +55,7 @@ contratos, no de las clases que los implementan.
 
 ### El facade `Quipu`
 
-`src/Quipu.php` es la puerta de entrada. Expone **21 métodos públicos**, agrupados por responsable:
+`Quipu` es la puerta de entrada. Expone **21 métodos públicos**, agrupados por responsable:
 
 | Responsable | Métodos |
 |---|---|
