@@ -25,20 +25,17 @@ php -m | grep -E 'soap|dom|openssl|zip|curl'
 
 ## Vía Composer
 
-::: warning quipu todavía no está publicado en Packagist
-El comando de abajo **aún no funciona**: el paquete no está publicado, así que `composer require` fallará con
-un error de paquete no encontrado. Publicarlo en Packagist está hoy **fuera del alcance** del core.
-
-Es el camino previsto para cuando se publique. Mientras tanto, la forma de usar quipu es **clonar el
-repositorio** y apuntar Composer a esa copia local.
-:::
-
 ```bash
-composer require elpandape/quipu
+composer require elpandape/quipu-lite
 ```
 
-Cuando el comando funcione, instalará también la única dependencia de runtime: `robrichards/xmlseclibs`, la
-librería estándar para la firma XML (xmldsig) y la canonicalización C14N.
+Instala también la única dependencia de runtime: `robrichards/xmlseclibs`, la librería estándar para la firma
+XML (xmldsig) y la canonicalización C14N.
+
+::: tip La edición Pro es comercial
+`elpandape/quipu-lite` (MIT) es el emisor completo. La edición **Pro** —motor tributario, envío resiliente,
+validación avanzada, tooling— es comercial y aún no se publica en Packagist; ver [Pro](/pro/introduccion).
+:::
 
 ## Verificación
 

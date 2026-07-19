@@ -16,7 +16,7 @@ La referencia —la primera implementación completa— está en PHP, dividida e
 
 | Paquete | Edición | Qué es |
 |---|---|---|
-| `elpandape/quipu` (`quipu-php-lite`) | **Lite** | El emisor completo: construye el XML UBL, lo firma, lo envía a SUNAT y parsea el CDR. PHP puro, sin framework. |
+| `elpandape/quipu-lite` (`quipu-php-lite`) | **Lite** | El emisor completo: construye el XML UBL, lo firma, lo envía a SUNAT y parsea el CDR. PHP puro, sin framework. |
 | `elpandape/quipu-pro` (`quipu-php-pro`) | **Pro** | La capa comercial sobre Lite: productividad, calidad y operación avanzada, 100 % local. Ver [la sección Pro](/pro/introduccion). |
 
 Pro **extiende** Lite: no lo reemplaza. Toda la maquinaria vive en Lite; Pro añade builders fluidos, motor

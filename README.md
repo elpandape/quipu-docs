@@ -62,6 +62,7 @@ por git.
 
 ## Despliegue
 
-El destino es **GitHub Pages** en `https://elpandape.github.io/quipu/`, servido bajo el subdirectorio `/quipu/`.
-Por eso `.vitepress/config.ts` declara `base: '/quipu/'`: ese valor **debe coincidir** con el subdirectorio de
-publicación, o los enlaces a los assets se rompen. El workflow de despliegue vive en `.github/workflows/`.
+Se publica en **Vercel** (ver `vercel.json`: build con `npm run build`, salida en `.vitepress/dist`) sobre el
+dominio propio **<https://quipu.elpanda.pe/>**. Como se sirve en la raíz del dominio, `.vitepress/config.ts` usa
+`base: '/'` (y el favicon del `head` apunta a `/favicon.svg`, porque VitePress no le aplica `base` a los atributos
+del head). Vercel despliega solo en cada push a `main` por su integración con git.

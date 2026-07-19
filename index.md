@@ -44,9 +44,10 @@ features:
     linkText: Ver la guía
 ---
 
-::: warning Pre-release — sin publicar
-quipu está completo pero **no está en Packagist** todavía y la **API pública puede cambiar** hasta la primera
-versión estable. Lo que cuenta como API pública (y lo que no) está en [Estado y versionado](/proyecto/estado-y-versionado).
+::: tip Estado
+El **emisor** `elpandape/quipu-lite` ya está en **Packagist** en su versión estable **`v1.0.0`** y sigue
+[Semantic Versioning](https://semver.org): dentro de `1.x` no hay cambios incompatibles en la API pública. La
+edición **Pro** (comercial) aún no se publica. Detalle en [Estado y versionado](/proyecto/estado-y-versionado).
 :::
 
 ::: tip Una maquinaria, varios lenguajes

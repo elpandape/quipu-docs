@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Sitio público de documentación de quipu (facturación electrónica de SUNAT / CPE Perú), en español.",
-  "homepage": "https://elpandape.github.io/quipu/",
+  "homepage": "https://quipu.elpanda.pe/",
   "repository": {
     "type": "git",
     "url": "https://github.com/elpandape/quipu-docs"

@@ -5,13 +5,13 @@ demás: existe solo para que encuentres rápido la respuesta y el enlace donde s
 
 ## ¿Está quipu en Packagist?
 
-No. quipu todavía no está publicado en Packagist, así que `composer require elpandape/quipu` aún no funciona y la
-vía de uso hoy es clonar el repositorio. Lee el motivo y la instalación en [instalación](/empezando/instalacion).
+Sí, el emisor: `composer require elpandape/quipu-lite` funciona (**`v1.0.0`**, MIT). La edición **Pro**
+(comercial) aún no se publica. Ver [instalación](/empezando/instalacion).
 
 ## ¿Hay releases estables?
 
-No. El paquete está en fase **pre-release**: no hay paquete publicado ni versiones estables para instalar por
-Composer. El estado del proyecto y la política de versionado se documentan en
+Sí. `quipu-lite` publicó su **`1.0.0`** estable y sigue Semantic Versioning (dentro de `1.x`, sin cambios
+incompatibles en la API pública). La edición **Pro** sigue en pre-release. Detalle en
 [estado y versionado](/proyecto/estado-y-versionado).
 
 ## ¿Necesito Laravel para usar quipu?

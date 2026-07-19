@@ -19,13 +19,20 @@ export default withMermaid(defineConfig({
   // hay que mover las tres juntas: `base`, el favicon del head y `sitemap.hostname`.
   base: '/',
 
+  // mermaid (vía vitepress-plugin-mermaid) engorda el bundle del cliente (~600 kB). Es un sitio
+  // estático que carga bien (gzip lo reduce a ~1/3), así que subimos el umbral del aviso de tamaño
+  // de chunk de Vite en vez de trocearlo. Es solo cosmético: el aviso no falla el build ni el deploy.
+  vite: {
+    build: { chunkSizeWarningLimit: 800 },
+  },
+
   head: [
     ['meta', { name: 'theme-color', content: '#3aa675' }],
     ['meta', { name: 'author', content: 'ElPandaPe' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'quipu — Facturación electrónica SUNAT en PHP' }],
     ['meta', { property: 'og:description', content: 'Librería PHP pura, framework-agnóstica, para la maquinaria de facturación electrónica de SUNAT (CPE Perú).' }],
-    ['meta', { property: 'og:url', content: 'https://elpandape.github.io/quipu/' }],
+    ['meta', { property: 'og:url', content: 'https://quipu.elpanda.pe/' }],
     // TODO: subir a 'summary_large_image' cuando exista public/og.png (PNG de 1200x630) y
     // declarar og:image apuntando a https://elpandape.github.io/quipu/og.png. Hoy public/ solo
     // tiene favicon.svg, y un SVG no sirve como og:image.
@@ -36,7 +43,7 @@ export default withMermaid(defineConfig({
   sitemap: {
     // Las <loc> se derivan de la ruta del .md SIN aplicar `base`, así que el hostname debe
     // incluirlo. La barra final es obligatoria: sin ella el join descarta el /quipu/.
-    hostname: 'https://elpandape.github.io/quipu/',
+    hostname: 'https://quipu.elpanda.pe/',
   },
 
   themeConfig: {
@@ -55,7 +62,7 @@ export default withMermaid(defineConfig({
     editLink: {
       // `:path` se reemplaza por la ruta relativa a srcDir (que es quipu-docs/), por eso el
       // /quipu-docs/ va escrito en el pattern.
-      pattern: 'https://github.com/elpandape/quipu/edit/main/quipu-docs/:path',
+      pattern: 'https://github.com/elpandape/quipu-docs/edit/main/:path',
       text: 'Editar esta página en GitHub',
     },
 
@@ -103,7 +110,7 @@ export default withMermaid(defineConfig({
           { text: 'Buenas prácticas', link: '/buenas-practicas/como-usar' },
           { text: 'Dominio SUNAT', link: '/dominio-sunat/cdr-ciclo-vida' },
           { text: 'Proyecto', link: '/proyecto/estado-y-versionado' },
-          { text: 'Changelog', link: 'https://github.com/elpandape/quipu/blob/main/CHANGELOG.md' },
+          { text: 'Changelog', link: 'https://github.com/elpandape/quipu-php-lite/blob/main/CHANGELOG.md' },
         ],
       },
     ],
@@ -237,7 +244,7 @@ export default withMermaid(defineConfig({
     ],
 
     footer: {
-      message: 'Lanzado bajo <a href="https://github.com/elpandape/quipu/blob/main/LICENSE.md">licencia MIT</a>. Paquete no oficial, no afiliado a SUNAT.',
+      message: 'Lanzado bajo <a href="https://github.com/elpandape/quipu-php-lite/blob/main/LICENSE.md">licencia MIT</a>. Paquete no oficial, no afiliado a SUNAT.',
       copyright: 'Copyright © 2026 ElPandaPe',
     },
   },

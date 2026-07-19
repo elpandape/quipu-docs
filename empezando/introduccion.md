@@ -5,7 +5,7 @@ la maquinaria que construye el comprobante, lo firma, lo envía a SUNAT y lee la
 **todo el ecosistema**, bajo una sola documentación **agnóstica de lenguaje** —lo que se explica es el dominio de
 SUNAT, no la API de un lenguaje concreto—.
 
-Su **implementación de referencia, y la única disponible hoy, es en PHP** (`elpandape/quipu`): PHP puro y
+Su **implementación de referencia, y la única disponible hoy, es en PHP** (`elpandape/quipu-lite`): PHP puro y
 framework-agnóstico. Las implementaciones en otros lenguajes son la [hoja de ruta del ecosistema](/proyecto/ecosistema),
 no algo que puedas instalar todavía; por eso los ejemplos de código muestran PHP hoy y anuncian el resto como
 "próximamente".
@@ -45,7 +45,7 @@ un paquete aparte.
 ## Ediciones: Lite y Pro
 
 **Emitir** cualquier comprobante —construir, firmar, enviar y leer el CDR— es capacidad de la edición **Lite**
-(`elpandape/quipu`), gratuita y de código abierto. Todo lo de "Empezando" y de [Documentos](/documentos/factura)
+(`elpandape/quipu-lite`), gratuita y de código abierto. Todo lo de "Empezando" y de [Documentos](/documentos/factura)
 funciona con Lite:
 
 <Availability lite pro />

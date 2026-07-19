@@ -35,9 +35,10 @@ composer require elpandape/quipu-pro
 </template>
 </CodeTabs>
 
-::: warning Pre-release
-Igual que Lite, Pro está en fase pre-release y **aún no se publica en Packagist**. La forma de usarlo hoy es
-apuntar Composer a una copia local del repositorio. Ver [Estado y versionado](/proyecto/estado-y-versionado).
+::: warning Pro es comercial y aún no se publica
+A diferencia de Lite —`elpandape/quipu-lite`, ya en Packagist (`v1.0.0`)—, Pro es la edición **comercial** y
+todavía **no se publica en Packagist**. Para adquirir una licencia o evaluarlo, escribe a **contacto@elpanda.pe**.
+Ver [Estado y versionado](/proyecto/estado-y-versionado).
 :::
 
 ## La fachada `QuipuPro`

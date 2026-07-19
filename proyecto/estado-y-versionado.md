@@ -1,25 +1,23 @@
 # Estado y versionado
 
-quipu funciona —construye, firma, envía y parsea el CDR— pero **todavía no es 1.0**. Esta página dice, sin
-maquillaje, en qué estado está el proyecto, qué puedes considerar API pública y qué se puede romper sin aviso.
-Léela antes de construir nada serio encima.
+El **emisor** (`elpandape/quipu-lite`) ya publicó su **`1.0.0`** estable en Packagist; la edición **Pro**
+(comercial) sigue en pre-release. Esta página dice, sin maquillaje, en qué estado está cada pieza, qué puedes
+considerar API pública y qué garantías tienes. Léela antes de construir nada serio encima.
 
 ## Estado real del proyecto
 
-quipu está en fase **pre-release**. Tres hechos verificables lo definen hoy:
+- **quipu-lite — estable (`1.0.0`).** El emisor está publicado en Packagist (`composer require elpandape/quipu-lite`),
+  etiquetado `v1.0.0` y bajo **Semantic Versioning**: dentro de `1.x` **no** habrá cambios incompatibles en la API
+  pública (ver [Versionado](#versionado)). El desarrollo ocurre sobre `main`; los cambios notables están en su
+  [CHANGELOG](https://github.com/elpandape/quipu-php-lite/blob/main/CHANGELOG.md).
+- **quipu-pro — comercial, pre-release.** La edición Pro (motor tributario, envío resiliente, validación
+  avanzada, tooling) aún **no se publica**; para adquirir una licencia o evaluarla, escribe a **contacto@elpanda.pe**.
+- **Otros lenguajes — próximamente.** La implementación de referencia es PHP; el resto del
+  [ecosistema](/proyecto/ecosistema) aún no existe.
 
-- **No hay releases.** El repositorio no tiene *tags* (`git tag -l` no devuelve nada) y `composer.json` no
-  declara una clave `version`. El desarrollo ocurre sobre la rama `main`.
-- **No está publicado en Packagist.** `composer require elpandape/quipu` todavía falla: el paquete no existe
-  en el registry. La forma de usarlo hoy es clonar el repo y apuntar Composer a esa copia local (ver
-  [Instalación](/empezando/instalacion)). Publicarlo en Packagist está, por ahora, fuera del alcance del core.
-- **La API puede cambiar sin aviso.** Al no haber un 1.0 etiquetado, nada te protege de un *breaking change*
-  en la siguiente Pull Request. Esto es lo que cambia cuando se publique (ver [Versionado](#versionado)).
-
-::: danger Pre-release: no lo trates como estable
-Mientras no exista un tag `1.0.0`, quipu puede romper su API en cualquier commit. Si lo usas hoy, ancla a un
-commit específico de `main` (no a `main` flotando) y revisa el diff en cada actualización. Lo que sí puedes
-esperar que se mantenga está descrito en [Qué es API pública](#que-es-api-publica).
+::: tip Lite es estable; Pro y los ports, no
+Puedes fijar `elpandape/quipu-lite` con un rango SemVer (p. ej. `^1.0`) y confiar en que no romperá dentro de
+`1.x`. Pro, en cambio, es pre-release: su API puede cambiar hasta que tenga su propio `1.0`.
 :::
 
 ### Cobertura funcional
@@ -51,9 +49,9 @@ La suite ronda los 700 tests automatizados.
 
 ## Qué es API pública
 
-La API pública es **lo que quipu-laravel y los usuarios pueden consumir sin sorpresas**. Mientras quipu sea
-pre-release "sin sorpresas" significa *se romperá poco y de forma ruidosa*; cuando se publique pasará a
-significar *cubierto por SemVer*. Concreto: depende de los contratos, no de las clases que los implementan.
+La API pública es **lo que quipu-laravel y los usuarios pueden consumir sin sorpresas**. Para `quipu-lite`
+(publicado), "sin sorpresas" significa *cubierto por SemVer* dentro de `1.x`. Concreto: depende de los
+contratos, no de las clases que los implementan.
 
 ### El facade `Quipu`
 
@@ -117,9 +115,8 @@ Si necesitas un `XmlBuilder` distinto, implementa `Contract\XmlBuilder` e inyéc
 
 ## Versionado
 
-La política prevista es **Semantic Versioning (SemVer)** *a partir de la publicación*. Mientras quipu sea
-pre-release, esa política aún no entra en vigor: la API puede cambiar en cualquier momento, sin bump de
-versión mayor, porque no hay versión que bumpar.
+`quipu-lite` sigue **Semantic Versioning (SemVer)** desde su `1.0.0`. La edición **Pro**, aún en pre-release,
+todavía no: su API puede cambiar sin bump de versión mayor hasta que tenga su propio `1.0`.
 
 - `MAJOR` — cambios incompatibles en la API pública.
 - `MINOR` — funcionalidad añadida compatible hacia atrás.
