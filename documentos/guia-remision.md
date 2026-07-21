@@ -296,7 +296,7 @@ guía real**. Prevé un traslado de bajo riesgo para estrenarte, y verifica ante
 ## Estado de esta integración
 
 ::: warning El flujo GRE no se ha ejercido en vivo
-Según `docs/09-pendientes.md`, el round-trip completo —OAuth → envío → ticket → CDR— **todavía no se ha
+El round-trip completo —OAuth → envío → ticket → CDR— **todavía no se ha
 ejecutado contra un servidor real**: ni contra SUNAT ni contra el mock de la comunidad, porque falta
 disponer de un `client_id`/`client_secret` OAuth de la API GRE. El código y el ejemplo están construidos y
 cubiertos por tests con el transporte HTTP mockeado, pero eso **no** sustituye a la verificación en vivo.

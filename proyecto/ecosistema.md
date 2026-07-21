@@ -5,19 +5,20 @@ electrónica de SUNAT, pensada para crecer a varios lenguajes bajo **una sola do
 página describe qué existe hoy y hacia dónde apunta.
 
 ::: warning Estado honesto
-Hoy existen sólo las dos implementaciones en **PHP**: `quipu-php-lite` y `quipu-php-pro`. Las implementaciones en
-otros lenguajes que aparecen más abajo **todavía no existen**: son la dirección del proyecto, no algo que puedas
-instalar ahora.
+Hoy la maquinaria existe sólo en **PHP**: `quipu-php-lite` y `quipu-php-pro`, más la integración
+`quipu-laravel`. Las implementaciones en otros lenguajes que aparecen más abajo **todavía no existen**: son la
+dirección del proyecto, no algo que puedas instalar ahora.
 :::
 
 ## Lo que existe hoy: PHP
 
 La referencia —la primera implementación completa— está en PHP, dividida en dos ediciones:
 
-| Paquete | Edición | Qué es |
-|---|---|---|
-| `elpandape/quipu-lite` (`quipu-php-lite`) | **Lite** | El emisor completo: construye el XML UBL, lo firma, lo envía a SUNAT y parsea el CDR. PHP puro, sin framework. |
-| `elpandape/quipu-pro` (`quipu-php-pro`) | **Pro** | La capa comercial sobre Lite: productividad, calidad y operación avanzada, 100 % local. Ver [la sección Pro](/pro/introduccion). |
+| Paquete | Edición | Qué es | Se instala desde |
+|---|---|---|---|
+| `elpandape/quipu-lite` (`quipu-php-lite`) | **Lite** | El emisor completo: construye el XML UBL, lo firma, lo envía a SUNAT y parsea el CDR. PHP puro, sin framework. MIT. | **Packagist**, sin trámite |
+| `elpandape/quipu-pro` (`quipu-php-pro`) | **Pro** | La capa comercial sobre Lite: productividad, calidad y operación avanzada, 100 % local. Ver [la sección Pro](/pro/introduccion). | Repositorio privado **`packages.elpanda.pe`**, con [licencia](/pro/instalacion) |
+| `elpandape/quipu-laravel` | **Integración** | La capa de aplicación para Laravel: persistencia, correlativos, colas, eventos y comandos Artisan. Auto-detecta Pro. MIT. Ver [Integración con Laravel](/integraciones/laravel). | **Packagist**, sin trámite |
 
 Pro **extiende** Lite: no lo reemplaza. Toda la maquinaria vive en Lite; Pro añade builders fluidos, motor
 tributario, validación avanzada, diagnóstico, infraestructura resiliente y utilidades. La división edición está

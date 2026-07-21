@@ -4,9 +4,17 @@ quipu es una librería **PHP 8.4+ pura y framework-agnóstica** que implementa l
 electrónica de SUNAT. Toda la ayuda cuenta: un código de catálogo que te falta, un rechazo que no logras
 explicar, un ejemplo más claro o una corrección en esta documentación.
 
-Esta página explica **cómo** contribuir de forma que tu aporte encaje a la primera. Las convenciones internas
-de diseño viven en el repo (no en este sitio), y se enlazan más abajo: cuando algo aquí te quede corto, ahí
-está el detalle.
+Esta página explica **cómo** contribuir de forma que tu aporte encaje a la primera. El código vive en
+repositorios separados, uno por paquete:
+
+| Repositorio | Qué contiene |
+|---|---|
+| [`elpandape/quipu-php-lite`](https://github.com/elpandape/quipu-php-lite) | El emisor (MIT). Es donde van los PRs de la librería. |
+| [`elpandape/quipu-laravel`](https://github.com/elpandape/quipu-laravel) | La integración con Laravel (MIT). |
+| [`elpandape/quipu-docs`](https://github.com/elpandape/quipu-docs) | Este sitio. |
+
+La edición **Pro** es comercial y su código no es público; los reportes sobre Pro van por
+**contacto@elpanda.pe**.
 
 > [!TIP] Si solo quieres editar esta documentación
 > Cada página tiene un enlace *«Editar esta página en GitHub»* arriba a la derecha. Abre un PR desde ahí; lo
@@ -21,28 +29,31 @@ quipu **no corre con PHP local**: el entorno entero vive en Docker y se maneja c
 Necesitas Docker y `docker compose`. Para levantar el entorno por primera vez:
 
 ```bash
-git clone https://github.com/elpandape/quipu.git
-cd quipu
+git clone https://github.com/elpandape/quipu-php-lite.git
+cd quipu-php-lite
 make install   # composer install dentro del contenedor
 ```
 
-Para trabajar en **este sitio** (VitePress, Node), los targets son otros y también van por Docker:
+**Este sitio es otro repositorio y no usa PHP**: es VitePress sobre Node 22+, con `npm` directo.
 
 ```bash
-make docs-install   # npm ci
-make docs-dev       # servidor en http://localhost:5173
-make docs           # build de producción a .vitepress/dist
+git clone https://github.com/elpandape/quipu-docs.git
+cd quipu-docs
+npm install
+npm run dev     # servidor en http://localhost:5173
+npm run build   # build de producción a .vitepress/dist
 ```
 
-::: warning El alcance de cada `make`
-`make review` / `make test` / `make fix` son para el **código PHP de la librería** (`src/`). Para el **sitio**
-se usa `make docs-dev` y `make docs`. Mezclarlos es el error más común al arrancar.
+::: warning El alcance de cada herramienta
+`make review` / `make test` / `make fix` son para el **código PHP de la librería** (`src/`), y solo existen
+en los repositorios de los paquetes. El **sitio** se levanta con `npm run dev`. Mezclarlos es el error más
+común al arrancar.
 :::
 
 ## Flujo de desarrollo
 
 1. **Rama**: trabaja sobre `main` o abre una rama `feature/*` para tu PR (`git switch -c feature/algo`).
-2. **Cambios** en `src/` (librería) o `quipu-docs/` (sitio).
+2. **Cambios** en `src/` (librería) o en las páginas `.md` (sitio).
 3. **Calidad** antes de pedir review: deja `make review` **verde al 100%**.
 
 ```bash
@@ -52,15 +63,15 @@ make fix       # auto-formatea (rector + php-cs-fixer); vuelve a correr make rev
 ```
 
 `make review` corresponde a `composer review` y es el gate que CI exige en la matriz **PHP 8.4 / 8.5**. Si
-tocaste `src/`, debe quedar verde; si solo tocaste `quipu-docs/`, alcanza con `make docs` verde.
+tocaste `src/`, debe quedar verde; si solo tocaste el sitio, alcanza con `npm run build` verde.
 
 Si tu cambio involucra firma (ej. un nuevo caso de test que firma un XML), (re)genera el certificado de
 prueba autofirmado con `make cert` antes de correr los tests.
 
 Las convenciones de código (PHP 8.4, `declare(strict_types=1)`, DTOs `readonly`, enums para catálogos,
-identificadores en inglés, cero acople a framework) se documentan en
-[`docs/02-convenciones.md`](https://github.com/elpandape/quipu/blob/main/docs/02-convenciones.md). Léelo
-antes de tocar `src/`.
+identificadores en inglés, cero acople a framework) se resumen en el
+[`CONTRIBUTING.md`](https://github.com/elpandape/quipu-php-lite/blob/main/CONTRIBUTING.md) del repositorio.
+Léelo antes de tocar `src/`.
 
 ## Reportar un rechazo de SUNAT
 
@@ -193,9 +204,8 @@ envoltorios. No declares funciones dentro de un test, ni siquiera como atajo.
   como función en `tests/Pest.php`.
 
 ¿Necesitas una variante de un fixture? **Parametriza o añade un método a la factory** y llámala desde el
-test; no la dupliques ni la declares inline. El detalle completo (certificado de prueba, estrategia por
-capa, fixtures de CDR) está en
-[`docs/04-testing.md`](https://github.com/elpandape/quipu/blob/main/docs/04-testing.md).
+test; no la dupliques ni la declares inline. El certificado de prueba autofirmado lo genera `make cert`; los
+fixtures de CDR viven en `tests/Fixtures/` del propio repositorio.
 
 ## Commits
 
@@ -216,11 +226,12 @@ La rama principal es `main`; el trabajo en ramas `feature/*`.
 
 ## Mejorar esta documentación
 
-El sitio es VitePress con contenido en español bajo `quipu-docs/`. Para iterar rápido:
+El sitio es VitePress con contenido en español, en el repositorio
+[`elpandape/quipu-docs`](https://github.com/elpandape/quipu-docs). Para iterar rápido:
 
 ```bash
-make docs-install   # solo la primera vez
-make docs-dev       # http://localhost:5173, recarga en vivo
+npm install     # solo la primera vez
+npm run dev     # http://localhost:5173, recarga en vivo
 ```
 
 Reglas del sitio que conviene tener presentes:
@@ -228,10 +239,10 @@ Reglas del sitio que conviene tener presentes:
 - **Contenido en español** con tildes correctas; **identificadores de código en inglés**.
 - Enlaces internos como **rutas absolutas sin extensión**: `[manejo de errores](/buenas-practicas/manejo-errores)`.
 - Containers `::: tip` / `::: warning` / `::: danger`, `#` como título y `##`/`###` para secciones.
-- Si documentas una **decisión de diseño** (el *por qué* interno), va en `docs/` (interno), no en el sitio;
-  el sitio documenta **cómo se usa** quipu.
+- El sitio documenta **cómo se usa** quipu, no el *por qué* interno del diseño.
 - Verifica cada afirmación contra `src/` antes de escribirla; un snippet PHP debe compilar, con todos sus
   `use ...;` y los nombres reales de clases y métodos.
 
-No edites a mano `.vitepress/config.ts` para añadir una página al menú: el sidebar se mantiene aparte. Si tu
-nueva página debe aparecer en el menú, indícalo en el PR y se engancha.
+Añadir una página son **dos pasos**: crear el `.md` en la carpeta que le toque y registrarla en el `sidebar`
+de `.vitepress/config.ts` (con el `link` sin extensión, porque el sitio usa `cleanUrls`). Saltarse el segundo
+deja la página publicada pero inalcanzable desde la navegación.

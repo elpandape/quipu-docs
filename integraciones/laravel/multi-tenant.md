@@ -1,6 +1,6 @@
 # Multi-tenant
 
-<Availability pro />
+<Availability lite pro />
 
 Emite para **muchos emisores** (tenants), cada uno con su RUC, certificado, series y almacenamiento. quipu no
 reinventa la tenancy: se **integra** con el paquete que ya uses. Probado con **`stancl/tenancy`** y

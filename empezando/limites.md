@@ -36,8 +36,9 @@ La separación es intencional: quipu es **agnóstica de framework y de aplicaci�
 armado y devuelve un `Result\*`; no sabe de bases de datos ni de flujos de venta. Eso la hace **reutilizable**
 en cualquier proyecto PHP y **testeable** sin infraestructura.
 
-La integración con un framework concreto (persistencia, correlativos, estados, jobs, config) vivirá en un
-paquete aparte que se engancha por las **interfaces** de quipu, no por sus clases concretas.
+La integración con un framework concreto (persistencia, correlativos, estados, jobs, config) vive en un paquete
+aparte que se engancha por las **interfaces** de quipu, no por sus clases concretas. Para Laravel ya existe:
+[`elpandape/quipu-laravel`](/integraciones/laravel).
 
 ## Casos no cubiertos hoy
 

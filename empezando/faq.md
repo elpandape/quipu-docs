@@ -5,13 +5,23 @@ demás: existe solo para que encuentres rápido la respuesta y el enlace donde s
 
 ## ¿Está quipu en Packagist?
 
-Sí, el emisor: `composer require elpandape/quipu-lite` funciona (**`v1.0.0`**, MIT). La edición **Pro**
-(comercial) aún no se publica. Ver [instalación](/empezando/instalacion).
+El emisor sí: `composer require elpandape/quipu-lite` funciona (**`v1.0.0`**, MIT). También lo está la
+integración con Laravel, `composer require elpandape/quipu-laravel` (MIT, gratuita). La edición **Pro** es
+comercial y **no está en Packagist**: se sirve desde un repositorio Composer privado. Ver
+[instalación](/empezando/instalacion).
+
+## ¿Cómo instalo la edición Pro?
+
+Declarando el repositorio privado `https://packages.elpanda.pe`, registrando las credenciales de tu licencia
+(tu **correo** y un **token UUID**) y luego `composer require elpandape/quipu-pro:^1.0`. Los tres pasos, con las
+trampas del `auth.json` y de CI, están en [instalación de Pro](/pro/instalacion). Para adquirir una licencia,
+escribe a **contacto@elpanda.pe**.
 
 ## ¿Hay releases estables?
 
-Sí. `quipu-lite` publicó su **`1.0.0`** estable y sigue Semantic Versioning (dentro de `1.x`, sin cambios
-incompatibles en la API pública). La edición **Pro** sigue en pre-release. Detalle en
+Sí, en las dos ediciones. `quipu-lite` publicó su **`1.0.0`** estable en Packagist y `quipu-pro` su `1.x` en el
+repositorio privado; `quipu-laravel` también está estable en su `1.x`. Las tres siguen Semantic Versioning
+(dentro de `1.x`, sin cambios incompatibles en la API pública). Detalle en
 [estado y versionado](/proyecto/estado-y-versionado).
 
 ## ¿Necesito Laravel para usar quipu?

@@ -2,7 +2,9 @@
 
 <Availability pro />
 
-Todo lo de esta página requiere `elpandape/quipu-pro` además de `quipu-laravel`. La integración lo
+Todo lo de esta página requiere `elpandape/quipu-pro` además de `quipu-laravel`. Pro es comercial y se instala
+desde un repositorio Composer privado con las credenciales de tu licencia — ver
+[Instalación de Pro](/pro/instalacion). La integración lo
 **auto-detecta** y enriquece la emisión **sin que cambies tu código**: lo de [Uso (base)](/integraciones/laravel/uso)
 sigue funcionando igual, solo que mejor por debajo. El detalle de cada capacidad vive en la sección
 [quipu Pro](/pro/introduccion); esta página describe cómo Laravel la activa.

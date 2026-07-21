@@ -47,7 +47,11 @@ features:
 ::: tip Estado
 El **emisor** `elpandape/quipu-lite` ya está en **Packagist** en su versión estable **`v1.0.0`** y sigue
 [Semantic Versioning](https://semver.org): dentro de `1.x` no hay cambios incompatibles en la API pública. La
-edición **Pro** (comercial) aún no se publica. Detalle en [Estado y versionado](/proyecto/estado-y-versionado).
+edición **Pro** (comercial) también publicó su `1.x`, pero se instala desde un repositorio Composer privado con
+licencia — ver [Instalación de Pro](/pro/instalacion). La integración con Laravel `elpandape/quipu-laravel`
+(MIT, gratuita) está igualmente en Packagist en su `1.x` — ver
+[Integración con Laravel](/integraciones/laravel). Detalle en
+[Estado y versionado](/proyecto/estado-y-versionado).
 :::
 
 ::: tip Una maquinaria, varios lenguajes

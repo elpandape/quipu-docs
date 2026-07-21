@@ -23,22 +23,43 @@ que puedes adoptarlo pieza por pieza o de golpe con la fachada.
 
 ## Instalación
 
-Pro depende de Lite y se instala como un paquete aparte:
-
-<CodeTabs>
-<template #php>
+Pro depende de Lite y se instala como un paquete aparte. Como es la edición **comercial**, **no está en
+Packagist**: se sirve desde un **repositorio Composer privado** —`https://packages.elpanda.pe`— autenticado con
+las credenciales de tu licencia (el **correo** del licenciatario y un **token UUID**). Son tres pasos:
 
 ```bash
-composer require elpandape/quipu-pro
+# 1) Declara el repositorio privado en tu composer.json
+#    (equivale a añadir a mano { "type": "composer", "url": "https://packages.elpanda.pe" }
+#     en "repositories": haz una cosa o la otra, no las dos)
+composer config repositories.elpanda composer https://packages.elpanda.pe
+
+# 2) Registra las credenciales de tu licencia (en el auth.json global, fuera del repo)
+composer config --global --auth http-basic.packages.elpanda.pe tu-correo@empresa.com EL-TOKEN-UUID
+
+# 3) Instala
+composer require elpandape/quipu-pro:^1.0
 ```
 
-</template>
-</CodeTabs>
+El token es un **UUID de 36 caracteres**. Antes de nada, comprueba que el tuyo sirve —así te ahorras depurar
+Composer con una credencial muerta—:
 
-::: warning Pro es comercial y aún no se publica
-A diferencia de Lite —`elpandape/quipu-lite`, ya en Packagist (`v1.0.0`)—, Pro es la edición **comercial** y
-todavía **no se publica en Packagist**. Para adquirir una licencia o evaluarlo, escribe a **contacto@elpanda.pe**.
-Ver [Estado y versionado](/proyecto/estado-y-versionado).
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' \
+  -u tu-correo@empresa.com:EL-TOKEN-UUID https://packages.elpanda.pe/packages.json
+# 200 = válido · 401 = correo/token incorrectos · 403 = licencia no vigente
+```
+
+::: warning Pro requiere licencia comercial
+Sin el paso 1 el `composer require` falla con *«It's a private package and you forgot to add a custom
+repository»*. Sin el paso 2 el servidor responde `401`, que Composer muestra como *«The '…/packages.json' URL
+required authentication (HTTP 401). You must be using the interactive console to authenticate»* — esa segunda
+frase despista: **no** hay que autenticarse a mano, falta el paso 2. Un `403` significa licencia vencida.
+
+Los tokens no son autoservicio: para adquirir una licencia, evaluar Pro o que te reemitan un token, escribe a
+**contacto@elpanda.pe**.
+
+El detalle completo —`auth.json` que nunca se commitea, `COMPOSER_AUTH` en CI, la caché de Composer que finge
+que sigues autorizado, diagnóstico de errores— está en [Instalación de Pro](/pro/instalacion).
 :::
 
 ## La fachada `QuipuPro`
@@ -147,7 +168,7 @@ La fachada también expone `creditNote(Client)` y `debitNote(Client)` para las n
 | **Certificados** | Inspección, conversión PFX→PEM y verificación pre-vuelo | [Certificados](/pro/certificados) |
 | **Herramientas XML** | Inspector XPath, comparador de XML y conversor a JSON | [Herramientas XML](/pro/xml-tooling) |
 | **Testing toolkit** | Fakes y aserciones para probar la integración sin red ni certificado | [Testing toolkit](/pro/testing) |
-| **CLI y Laravel** | Consola y paquete Laravel (próximamente) | [CLI y Laravel](/pro/cli-laravel) |
+| **CLI y Laravel** | Paquete Laravel (disponible) y consola (planificada) | [CLI y Laravel](/pro/cli-laravel) |
 
 ## Filosofía
 

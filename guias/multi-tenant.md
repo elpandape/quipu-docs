@@ -143,5 +143,7 @@ rotar el certificado.
 
 ## Siguiente paso
 
+- Si trabajas en Laravel, nada de esto se cablea a mano: `quipu-laravel` resuelve el tenant, su certificado y
+  sus correlativos por ti — ver [Multi-tenant en Laravel](/integraciones/laravel/multi-tenant).
 - [Certificados digitales](/guias/certificados)
 - [Cómo usar quipu](/buenas-practicas/como-usar)

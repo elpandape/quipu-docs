@@ -56,7 +56,9 @@ infraestructura resiliente y utilidades. No hace falta para emitir; es convenien
 
 <Availability pro />
 
-Ver [la sección Pro](/pro/introduccion) y el detalle del [ecosistema](/proyecto/ecosistema).
+Pro es la edición **comercial**: requiere licencia y se instala desde un repositorio Composer privado, no desde
+Packagist — ver [Instalación de Pro](/pro/instalacion). Para el detalle de qué añade, [la sección
+Pro](/pro/introduccion); para cómo encaja todo, el [ecosistema](/proyecto/ecosistema).
 
 ## Requisitos
 
@@ -68,8 +70,9 @@ Para la implementación de referencia en PHP:
 
 ## Disclaimer
 
-quipu es un paquete **no oficial**. No está afiliado, avalado ni patrocinado por SUNAT. Se distribuye bajo
-licencia **MIT**.
+quipu es un paquete **no oficial**. No está afiliado, avalado ni patrocinado por SUNAT. La edición **Lite**
+(`elpandape/quipu-lite`) se distribuye bajo licencia **MIT**; la edición **Pro** (`elpandape/quipu-pro`) es
+comercial y se distribuye bajo licencia propietaria.
 
 ## Siguiente paso
 

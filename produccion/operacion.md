@@ -122,4 +122,4 @@ Ver [Sensibilidad temporal](/dominio-sunat/sensibilidad-temporal) para qué part
 
 Un recordatorio de [Límites y alcance](/empezando/limites): persistencia, correlativos, máquina de estados,
 agenda del resumen diario, reintentos y conservación **no** son de quipu. Si trabajas en Laravel, ese es
-exactamente el hueco que pretende cubrir `quipu-laravel`.
+exactamente el hueco que cubre [`quipu-laravel`](/integraciones/laravel).

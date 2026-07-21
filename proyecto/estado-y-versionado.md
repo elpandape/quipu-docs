@@ -1,8 +1,9 @@
 # Estado y versionado
 
-El **emisor** (`elpandape/quipu-lite`) ya publicó su **`1.0.0`** estable en Packagist; la edición **Pro**
-(comercial) sigue en pre-release. Esta página dice, sin maquillaje, en qué estado está cada pieza, qué puedes
-considerar API pública y qué garantías tienes. Léela antes de construir nada serio encima.
+Las dos ediciones publicaron su **`1.0.0`** estable: el **emisor** (`elpandape/quipu-lite`) en Packagist y la
+edición **Pro** (comercial) en su repositorio Composer privado. Esta página dice, sin maquillaje, en qué estado
+está cada pieza, qué puedes considerar API pública y qué garantías tienes. Léela antes de construir nada serio
+encima.
 
 ## Estado real del proyecto
 
@@ -10,14 +11,21 @@ considerar API pública y qué garantías tienes. Léela antes de construir nada
   etiquetado `v1.0.0` y bajo **Semantic Versioning**: dentro de `1.x` **no** habrá cambios incompatibles en la API
   pública (ver [Versionado](#versionado)). El desarrollo ocurre sobre `main`; los cambios notables están en su
   [CHANGELOG](https://github.com/elpandape/quipu-php-lite/blob/main/CHANGELOG.md).
-- **quipu-pro — comercial, pre-release.** La edición Pro (motor tributario, envío resiliente, validación
-  avanzada, tooling) aún **no se publica**; para adquirir una licencia o evaluarla, escribe a **contacto@elpanda.pe**.
+- **quipu-pro — estable (`1.x`, hoy `1.0.2`), comercial.** La edición Pro (motor tributario, envío resiliente,
+  validación avanzada, tooling) salió en `v1.0.0` y también sigue SemVer. **No se distribuye por Packagist**: se
+  sirve desde un repositorio Composer privado propio, `https://packages.elpanda.pe`, al que accedes con las
+  credenciales de tu licencia — ver [Instalación de Pro](/pro/instalacion). Para adquirir una licencia o
+  evaluarla, escribe a **contacto@elpanda.pe**.
+- **quipu-laravel — estable (`1.x`, hoy `1.0.1`), MIT y gratuito.** La integración con Laravel está publicada en
+  Packagist (`composer require elpandape/quipu-laravel`) y **auto-detecta** la edición Pro si está instalada. Ver
+  [Integración con Laravel](/integraciones/laravel).
 - **Otros lenguajes — próximamente.** La implementación de referencia es PHP; el resto del
   [ecosistema](/proyecto/ecosistema) aún no existe.
 
-::: tip Lite es estable; Pro y los ports, no
-Puedes fijar `elpandape/quipu-lite` con un rango SemVer (p. ej. `^1.0`) y confiar en que no romperá dentro de
-`1.x`. Pro, en cambio, es pre-release: su API puede cambiar hasta que tenga su propio `1.0`.
+::: tip Las dos ediciones son estables; los ports, no
+Puedes fijar tanto `elpandape/quipu-lite` como `elpandape/quipu-pro` con un rango SemVer (p. ej. `^1.0`) y
+confiar en que no romperán dentro de `1.x`. Lo que **no** existe todavía son las implementaciones en otros
+lenguajes.
 :::
 
 ### Cobertura funcional
@@ -115,15 +123,15 @@ Si necesitas un `XmlBuilder` distinto, implementa `XmlBuilder` e inyéctalo en e
 
 ## Versionado
 
-`quipu-lite` sigue **Semantic Versioning (SemVer)** desde su `1.0.0`. La edición **Pro**, aún en pre-release,
-todavía no: su API puede cambiar sin bump de versión mayor hasta que tenga su propio `1.0`.
+Ambas ediciones siguen **Semantic Versioning (SemVer)** desde su `1.0.0`:
 
 - `MAJOR` — cambios incompatibles en la API pública.
 - `MINOR` — funcionalidad añadida compatible hacia atrás.
 - `PATCH` — correcciones compatibles hacia atrás.
 
-No hay fecha comprometida para el `1.0.0` estable; alcanzarla depende de estabilizar la API pública descrita
-arriba y de publicar en Packagist. **No planifiques contra una fecha que no existe.**
+Lo que cambia entre ediciones no es la garantía, sino **el canal**: `quipu-lite` se resuelve desde Packagist y
+`quipu-pro` desde el repositorio privado `https://packages.elpanda.pe`, donde cada versión se descarga contra
+tu licencia (ver [Instalación de Pro](/pro/instalacion)). En los dos casos, fija el rango con `^1.0`.
 
 ### Cambios de regla de SUNAT y versionado
 

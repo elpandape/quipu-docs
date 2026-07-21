@@ -29,7 +29,11 @@ Es una envoltura de las utilidades que ya viste en esta sección ([certificados]
 
 Un paquete de integración para **Laravel**: service providers, *config* publicable, *facades* y *bindings* del
 contenedor para que un proyecto Laravel use quipu sin cablear las dependencias a mano. Añade además persistencia,
-series/correlativos, máquina de estados, colas, eventos, comandos Artisan y auto-detección de la edición Pro.
+series/correlativos, máquina de estados, colas, eventos, comandos Artisan, multi-tenant y auto-detección de la
+edición Pro.
+
+`elpandape/quipu-laravel` es **MIT y gratuito**, y está en Packagist: no forma parte de la licencia de Pro y
+funciona igual con solo `quipu-lite`. Lo que hace Pro es enriquecerlo cuando además está instalado.
 
 Su documentación completa —instalación, configuración, uso y testing— vive en
 [Integración con Laravel](/integraciones/laravel).

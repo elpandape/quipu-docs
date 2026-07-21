@@ -32,9 +32,11 @@ composer require elpandape/quipu-lite
 Instala también la única dependencia de runtime: `robrichards/xmlseclibs`, la librería estándar para la firma
 XML (xmldsig) y la canonicalización C14N.
 
-::: tip La edición Pro es comercial
-`elpandape/quipu-lite` (MIT) es el emisor completo. La edición **Pro** —motor tributario, envío resiliente,
-validación avanzada, tooling— es comercial y aún no se publica en Packagist; ver [Pro](/pro/introduccion).
+::: tip La edición Pro se instala aparte
+`elpandape/quipu-lite` (MIT) es el emisor completo y es lo único que necesitas para emitir. La edición **Pro**
+—motor tributario, envío resiliente, validación avanzada, tooling— es **comercial**: no está en Packagist, sino
+en un repositorio Composer privado (`https://packages.elpanda.pe`) al que accedes con las credenciales de tu
+licencia. Los tres pasos están en [Instalación de Pro](/pro/instalacion).
 :::
 
 ## Verificación
@@ -63,7 +65,8 @@ echo class_exists(Quipu::class) ? 'quipu disponible' : 'faltó algo';
 
 quipu **no acopla** a ningún framework. Funciona en cualquier proyecto PHP 8.4+ que use Composer: una app
 Slim, un script CLI, un worker de cola, una API con Symfony components standalone, etc. La integración con
-Laravel vivirá en un paquete aparte y se engancha por las **interfaces** de quipu, no por sus clases concretas.
+Laravel vive en un paquete aparte —`elpandape/quipu-laravel` (MIT, en Packagist)— y se engancha por las
+**interfaces** de quipu, no por sus clases concretas: ver [Integración con Laravel](/integraciones/laravel).
 
 ## Extensiones que pueden faltar en contenedores
 

@@ -175,6 +175,7 @@ export default withMermaid(defineConfig({
         text: 'Pro',
         items: [
           { text: 'Introducción', link: '/pro/introduccion' },
+          { text: 'Instalación y licencia', link: '/pro/instalacion' },
           { text: 'Fluent Builder', link: '/pro/fluent-builder' },
           { text: 'Motor tributario', link: '/pro/motor-tributario' },
           { text: 'Validación y diagnóstico', link: '/pro/validacion-diagnostico' },
@@ -240,7 +241,7 @@ export default withMermaid(defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/elpandape/quipu' },
+      { icon: 'github', link: 'https://github.com/elpandape/quipu-php-lite' },
     ],
 
     footer: {
